@@ -1,12 +1,27 @@
-// Mostrar año actual en el footer
 document.getElementById("y").textContent = new Date().getFullYear();
 
-// Opcional: Si quieres que el video siempre empiece a reproducirse
 const v = document.getElementById("heroVideo");
+function setVideoSrc(url) {
+  const source = v.querySelector("source") || document.createElement("source");
+  source.src = url;
+  source.type = "video/mp4";
+  if (!source.parentNode) v.appendChild(source);
+  v.load();
+}
+
 if (v) {
-  v.play().catch(() => {
-    // Algunos navegadores bloquean autoplay si no está silenciado
-    v.muted = true;
-    v.play().catch(() => {}); 
-  });
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !v.dataset.loaded) {
+          setVideoSrc("/media/video.mp4");   // usa tu archivo real
+          v.dataset.loaded = "1";
+          io.disconnect();
+        }
+      });
+    }, { rootMargin: "200px" });
+    io.observe(v);
+  } else {
+    setVideoSrc("/media/video.mp4");
+  }
 }

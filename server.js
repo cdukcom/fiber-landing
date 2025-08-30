@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const compression = require("compression");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;   // railway suele usar 8080
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, "public"), {
@@ -12,5 +12,11 @@ app.use(express.static(path.join(__dirname, "public"), {
   }
 }));
 
+// entrega index de forma explícita
+app.get("/", (_, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 app.get("/health", (_, res) => res.send("ok"));
+
 app.listen(port, () => console.log(`Listening on ${port}`));
