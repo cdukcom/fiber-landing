@@ -1,0 +1,26 @@
+:root{--bg:#0b1020;--ink:#e5e7eb;--muted:#94a3b8;--card:#0f172a;--accent:#22d3ee}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.container{max-width:1100px;margin-inline:auto;padding:16px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{height:36px}
+.header nav a{color:var(--ink);text-decoration:none;margin-left:16px;opacity:.85}
+.header nav a:hover{opacity:1}
+.btn{border:1px solid #1f2937;border-radius:999px;padding:8px 14px}
+.btn.primary{background:var(--accent);color:#03131a;border-color:transparent;font-weight:600}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:24px}
+.hero-media{border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.hero-copy h1{font-size:40px;line-height:1.1;margin:0 0 12px}
+.hero-copy p{color:var(--muted);margin:0 0 18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:36px auto}
+.card{background:var(--card);border:1px solid #1e293b;border-radius:14px;padding:18px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px auto}
+.gallery img{width:100%;height:auto;border-radius:12px;border:1px solid #1e293b}
+.contact .contact-list{list-style:none;padding:0;margin:8px 0}
+.contact a{color:var(--accent);text-decoration:none}
+.footer{opacity:.7;padding:24px 16px}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:16px}
+  .grid3{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+}
