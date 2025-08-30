@@ -1,27 +1,50 @@
+// Año en el footer
 document.getElementById("y").textContent = new Date().getFullYear();
 
-const v = document.getElementById("heroVideo");
-function setVideoSrc(url) {
-  const source = v.querySelector("source") || document.createElement("source");
-  source.src = url;
-  source.type = "video/mp4";
-  if (!source.parentNode) v.appendChild(source);
-  v.load();
-}
+// Lazy-load del video con fallback robusto
+(function () {
+  const v = document.getElementById("heroVideo");
+  if (!v) return;
 
-if (v) {
+  const MP4_SRC = "/media/video.mp4";
+
+  function loadAndPlay() {
+    // Asegurar flags para autoplay mobile
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+
+    // Cargar fuente (solo MP4 en tu repo)
+    if (v.src !== location.origin + MP4_SRC) {
+      v.src = MP4_SRC;
+    }
+    // Forzar carga y reproducir
+    v.load();
+    const p = v.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => {
+        // ok
+      }).catch(() => {
+        // Si el navegador bloquea autoplay, mostrar controles
+        v.setAttribute("controls", "");
+      });
+    }
+  }
+
+  // Lazy con IntersectionObserver
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting && !v.dataset.loaded) {
-          setVideoSrc("/media/video.mp4");   // usa tu archivo real
-          v.dataset.loaded = "1";
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          loadAndPlay();
           io.disconnect();
         }
       });
-    }, { rootMargin: "200px" });
+    }, { rootMargin: "200px 0px", threshold: 0.1 });
     io.observe(v);
   } else {
-    setVideoSrc("/media/video.mp4");
+    // Sin IO: cargar directo
+    loadAndPlay();
   }
-}
+})();
