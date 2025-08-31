@@ -6,7 +6,8 @@ document.getElementById("y").textContent = new Date().getFullYear();
   const v = document.getElementById("heroVideo");
   if (!v) return;
 
-  const MP4_SRC = "/media/video.mp4";
+  // 👇 Usa el nombre real del archivo que subiste
+  const MP4_SRC = "/media/video_hero_12s.mp4";
 
   function loadAndPlay() {
     // Asegurar flags para autoplay mobile
@@ -15,20 +16,15 @@ document.getElementById("y").textContent = new Date().getFullYear();
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
 
-    // Cargar fuente (solo MP4 en tu repo)
+    // Cargar fuente
     if (v.src !== location.origin + MP4_SRC) {
       v.src = MP4_SRC;
     }
-    // Forzar carga y reproducir
     v.load();
+
     const p = v.play();
     if (p && typeof p.then === "function") {
-      p.then(() => {
-        // ok
-      }).catch(() => {
-        // Si el navegador bloquea autoplay, mostrar controles
-        v.setAttribute("controls", "");
-      });
+      p.catch(() => v.setAttribute("controls", "")); // si bloquean autoplay, muestra controles
     }
   }
 
@@ -44,7 +40,6 @@ document.getElementById("y").textContent = new Date().getFullYear();
     }, { rootMargin: "200px 0px", threshold: 0.1 });
     io.observe(v);
   } else {
-    // Sin IO: cargar directo
     loadAndPlay();
   }
 })();
