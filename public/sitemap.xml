@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.fibersas.com/</loc>
+    <lastmod>2025-09-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.fibersas.com/img/hero-poster.jpg</video:thumbnail_loc>
+      <video:title>Soluciones IoT y redes industriales | Fiber Electronics SAS</video:title>
+      <video:description>IoT (LoRaWAN), gateways, sensores, switches industriales, módulos SFP, fibra óptica y cableado estructurado para proyectos en Colombia y LATAM.</video:description>
+      <video:content_loc>https://www.fibersas.com/media/hero_720.mp4</video:content_loc>
+      <video:publication_date>2025-09-01</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img4.jpeg</image:loc>
+      <image:title>Fibra óptica: bandejas, ODF, accesorios</image:title>
+      <image:caption>Soluciones de fibra óptica pasiva y activa para backbone y distribución.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img5.jpeg</image:loc>
+      <image:title>Cableado estructurado: face plates y accesorios</image:title>
+      <image:caption>Face plates, cajas de superficie y organizadores para redes de datos.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img6.jpeg</image:loc>
+      <image:title>Cable S/FTP Cat6/Cat6A</image:title>
+      <image:caption>Cables S/FTP para ambientes exigentes y alto apantallamiento.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img7.jpeg</image:loc>
+      <image:title>Patch cords SC/APC y LC</image:title>
+      <image:caption>Patch cords monomodo y multimodo OM3/OM4 para FO.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img8.jpeg</image:loc>
+      <image:title>Coaxial RG8 de baja pérdida</image:title>
+      <image:caption>Soluciones coaxiales para radioenlaces y RF.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img9.jpeg</image:loc>
+      <image:title>Patch cords OM3 / OM4</image:title>
+      <image:caption>Conectividad óptica de alta capacidad para centros de datos.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.fibersas.com/img/img10.jpeg</image:loc>
+      <image:title>Jacks y conectores Cat5e/Cat6/Cat6A</image:title>
+      <image:caption>Componentes de cableado estructurado para redes empresariales.</image:caption>
+    </image:image>
+  </url>
+</urlset>
