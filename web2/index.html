@@ -1,14 +1,13 @@
+<!-- index.html -->
+
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Fiber Electronics — Fibra Óptica y Networking</title>
   <meta name="description" content="Soluciones en fibra óptica, networking y servidores en Colombia.">
-
   <link rel="icon" href="./img/logos/fiber.png" />
-
   <!-- Styles -->
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
@@ -18,120 +17,126 @@
 <!-- HEADER -->
 <header class="header">
   <div class="container header-inner">
-
     <img src="./img/logos/fiber.png" alt="Fiber Electronics" class="logo">
-
     <nav class="nav">
       <a href="#fibra">Fibra Cableado</a>
       <a href="#activo">Switches MC SFP</a>
-      <a href="#servers">Servers</a>
       <a href="#bomaker">BOMaker</a>
-      <a href="#contact" class="btn">Contacto</a>
+      <a href="#contact" class="btn primary">Contacto</a>
     </nav>
-
   </div>
 </header>
-
 <main>
 
-<!-- ================= FIBRA ================= -->
+<!-- ================= PASIVO ================= -->
 <section class="section section-light" id="fibra">
   <div class="container">
-
     <h2>Fibra Óptica y Cableado</h2>
-
-    <div class="cards-grid">
-
-      <div class="card">
-        <img src="./img/fo/patchcord.png">
-        <h3>Patch Cord</h3>
+    <div class="fiber-wrapper mega-container">
+      <div class="grid fiber-grid">
+        <div class="card" data-link="patchcord">
+          <img src="./img/fo/patchcord.png">
+          <h3>Patch Cord Fibra Optica</h3>
+        </div>
+        <div class="card" data-link="odf">
+          <img src="./img/fo/odf.png">
+          <h3>ODF / Adaptadores / kits</h3>
+        </div>
+        <div class="card" data-link="rack">
+          <img src="./img/fo/rack.png">
+          <h3>Racks y Gabinetes</h3>
+        </div>
+        <div class="card" data-link="cableado">
+          <img src="./img/fo/cableado.png">
+          <h3>Cableado Estructurado Cat 5e, 6 y 6A</h3>
+        </div>
+        <div class="card" data-link="cablefo">
+          <img src="./img/fo/cablefo.png">
+          <h3>Cable Fibra Optica</h3>
+        </div>
+        <div class="card" data-link="cajaob">
+          <img src="./img/fo/cajaob.png">
+          <h3>Cajas OB y Muflas</h3>
+        </div>
+        <div class="card" data-link="cableext">
+          <img src="./img/fo/cableext.png">
+          <h3>Cables Exteriores y RG</h3>
+        </div>
+        <div class="card" data-link="herramientas">
+          <img src="./img/fo/herramientas.png">
+          <h3>Herramientas Fibra Optica</h3>
+        </div>
       </div>
-
-      <div class="card">
-        <img src="./img/fo/odf.png">
-        <h3>ODF / Adaptadores</h3>
-      </div>
-
-      <div class="card">
-        <img src="./img/fo/rack.png">
-        <h3>Metalmecánica</h3>
-      </div>
-
-      <div class="card">
-        <img src="./img/fo/cableado.png">
-        <h3>Cableado</h3>
-      </div>
-
     </div>
-
-  </div>
-</section>
-
-<!-- ================= BANNER DUKEVILLA ================= -->
-<section class="banner banner-light">
-  <div class="container banner-flex">
-
-    <div>
-      <h3>Conectamos tecnologías que no hablan entre sí</h3>
-      <p>MQTT • LoRaWAN • Modbus • BLE • HTTP</p>
-      <a href="https://duke-villa.com" class="btn primary">Ver soluciones</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= ACTIVO ================= -->
-<section class="section section-gray" id="activo">
-  <div class="container">
-
-    <h2>Activo de Red</h2>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>Switches</h3>
-      </div>
-
-      <div class="card">
-        <h3>Media Converter</h3>
-      </div>
-
-      <div class="card">
-        <h3>SFP</h3>
-      </div>
-
-    </div>
-
   </div>
 </section>
 
 <!-- ================= BOMAKER ================= -->
-<section class="banner banner-cta" id="bomaker">
-  <div class="container banner-flex">
-
-    <div>
-      <h3>Diseña tu red de fibra en minutos</h3>
-      <p>Genera un BOM automático y cotízalo por WhatsApp</p>
-      <a href="#" class="btn primary">Crear diseño</a>
+<a class="fe-banner-line" href="#" id="bomaker">
+  <div class="fe-banner-line__inner">
+    <div class="fe-banner-line__text">
+      <strong>Diseña tu red de fibra en minutos</strong>
+      <span>Genera automáticamente distancias y materiales</span>
     </div>
-
+    <div class="fe-banner-line__carousel">
+      <div class="fe-banner-line__track">
+        <img src="./img/bomaker/design1.png">
+        <img src="./img/bomaker/design2.png">
+        <img src="./img/bomaker/design3.png">
+        <img src="./img/bomaker/design4.png">
+        <!-- duplicado para loop -->
+        <img src="./img/bomaker/design1.png">
+        <img src="./img/bomaker/design2.png">
+        <img src="./img/bomaker/design3.png">
+        <img src="./img/bomaker/design4.png">
+      </div>
+    </div>
   </div>
-</section>
+</a>
 
-<!-- ================= SERVERS ================= -->
-<section class="section section-light" id="servers">
+<!-- ================= ACTIVO ================= -->
+<section class="section section-gray" id="activo">
   <div class="container">
-
-    <h2>Servers</h2>
-
-    <div class="card">
-      <h3>General Computing</h3>
+    <h2>Switch, Media Converter (MC) y SFP.</h2>
+    <div class="active-wrapper mega-container">
+      <div class="grid active-grid">
+        <div class="card" data-link="switch">
+          <img src="./img/activo/switch.png">
+          <h3>Switches</h3>
+        </div>
+        <div class="card" data-link="mc">
+          <img src="./img/activo/mc.png">
+          <h3>Media Converter (MC)</h3>
+        </div>
+        <div class="card" data-link="sfp">
+          <img src="./img/activo/sfp.png">
+          <h3>QSFP56, QSFP28, QSFP+, QSFP, SFP+, SFP</h3>
+        </div>
+      </div>
     </div>
-
   </div>
 </section>
 
-</main>
+<!-- ================= BANNER DUKEVILLA ================= -->
+<a class="fe-banner-line" href="https://www.duke-villa.com" id="dukevilla">
+  <div class="fe-banner-line__inner">
+    <div class="fe-banner-line__text">
+      <strong>Conectamos tecnologías que no hablan entre sí</strong>
+      <span>MQTT • LoRaWAN • Modbus • BLE • HTTP</span>
+    </div>
+    <div class="fe-banner-line__carousel">
+      <div class="fe-banner-line__track">
+        <img src="./img/dukevilla/traduktor.png">
+        <img src="./img/dukevilla/demo.png">
+        <img src="./img/dukevilla/faciliot.png">
+        <!-- loop -->
+        <img src="./img/dukevilla/traduktor.png">
+        <img src="./img/dukevilla/demo.png">
+        <img src="./img/dukevilla/faciliot.png">
+      </div>
+    </div>
+  </div>
+</a>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer" id="contact">
@@ -170,5 +175,3 @@
 
 </body>
 </html>
-
-
