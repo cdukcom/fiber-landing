@@ -21,7 +21,7 @@
     <nav class="nav">
       <a href="#fibra">Fibra Cableado</a>
       <a href="#activo">Switches MC SFP</a>
-      <a href="#bomaker">BOMaker</a>
+      <a href="bomaker.html">BOMaker</a>
       <a href="#contact" class="btn primary">Contacto</a>
     </nav>
   </div>
@@ -33,7 +33,7 @@
   <div class="container">
     <h2>Fibra Óptica y Cableado</h2>
     <div class="fiber-wrapper mega-container">
-      <div class="grid fiber-grid">
+      <div class="grid fiber-grid" id="fiber-grid">
         <div class="card" data-link="patchcord">
           <img src="./img/fo/patchcord.png">
           <h3>Patch Cord Fibra Optica</h3>
@@ -67,12 +67,15 @@
           <h3>Herramientas Fibra Optica</h3>
         </div>
       </div>
+      
+      <div class="fiber-expansion expansion-container" id="fiber-expansion"></div>
+      
     </div>
   </div>
 </section>
 
 <!-- ================= BOMAKER ================= -->
-<a class="fe-banner-line" href="#" id="bomaker">
+<a class="fe-banner-line" href="bomaker.html">
   <div class="fe-banner-line__inner">
     <div class="fe-banner-line__text">
       <strong>Diseña tu red de fibra en minutos</strong>
@@ -99,7 +102,7 @@
   <div class="container">
     <h2>Switch, Media Converter (MC) y SFP.</h2>
     <div class="active-wrapper mega-container">
-      <div class="grid active-grid">
+      <div class="grid active-grid" id="active-grid">
         <div class="card" data-link="switch">
           <img src="./img/activo/switch.png">
           <h3>Switches</h3>
@@ -113,6 +116,9 @@
           <h3>QSFP56, QSFP28, QSFP+, QSFP, SFP+, SFP</h3>
         </div>
       </div>
+      
+      <div class="active-expansion expansion-container" id="active-expansion"></div>
+
     </div>
   </div>
 </section>
@@ -154,7 +160,14 @@
       <h4>Contacto</h4>
       <p>
         📧 ventas@fibersas.com<br>
-        📱 +57 313 499 1444
+        📱 
+        <a 
+          href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20sus%20productos.%20¿Me%20pueden%20ayudar%20con%20una%20cotización?"
+          target="_blank"
+          class="footer-whatsapp"
+        >
+          +57 313 499 1444
+        </a>
       </p>
     </div>
 
@@ -172,6 +185,8 @@
     Powered by DukeVilla
   </div>
 </footer>
+
+<script type="module" src="./js/index.js"></script>
 
 </body>
 </html>
