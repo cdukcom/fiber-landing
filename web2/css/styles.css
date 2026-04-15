@@ -123,11 +123,6 @@ body {
   margin-bottom: 16px;
 }
 
-.footer-desc {
-  color: var(--muted);
-  font-size: 14px;
-}
-
 .footer h4 {
   margin-bottom: 12px;
   font-size: 15px;
@@ -283,9 +278,9 @@ body {
 }
 
 .fe-banner-line__text{
-  display: 1;
-  min-width: 0;
+  display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 2px;
 }
 
@@ -358,46 +353,6 @@ body {
 @keyframes fe-line-scroll{
   0%{ transform: translateX(0); }
   100%{ transform: translateX(-50%); }
-}
-
-/* =========================
-   ANIMACIONES PRO
-   ========================= */
-
-.grid.fade-out {
-  opacity: 0;
-  transform: scale(0.98);
-  transition: all 0.25s ease;
-}
-
-.expansion-container {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.expansion-container.active {
-  display: block;
-  animation: expansionIn 0.35s ease forwards;
-}
-
-@keyframes expansionIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* card activa */
-
-.card.active-card {
-  transform: scale(1.05);
-  z-index: 5;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
 }
 
 /* =========================
@@ -495,6 +450,45 @@ body {
 }
 
 /* =========================
+   PATCHCORD CONFIGURADOR
+   ========================= */
+
+.pc-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pc-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.pc-form select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.pc-result {
+  margin-top: 20px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* botón deshabilitado */
+
+.btn-disabled {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ccc;
+  border: none;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+
+/* =========================
    BOMAKER PAGE
    ========================= */
 
@@ -502,28 +496,6 @@ body {
   max-width: 1200px;
   margin: 60px auto;
   padding: 20px;
-}
-
-.bomaker-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.bomaker-header h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
-.bomaker-back {
-  cursor: pointer;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.bomaker-back:hover {
-  text-decoration: underline;
 }
 
 .bomaker-grid {
@@ -560,3 +532,22 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.pc-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pc-image {
+  max-width: 420px;
+  width: 100%;
+}
+
+.pc-legend {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
