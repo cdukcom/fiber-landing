@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+Website: https://www.fibersas.com
+
+Brand: Fiber Electronics SAS
+Operated by: DukeVilla LLC
+
+Description:
+Fiber Electronics provides fiber optic connectivity products,
+industrial networking solutions, and IoT infrastructure.
+
+Key topics:
+Fiber Optics, Patch Cords, Networking, Industrial Connectivity, IoT
+
+Technologies:
+Ethernet, Fiber Optics, SFP, Media Converters, Switches
+
+Contact:
+ventas@fibersas.com
+
