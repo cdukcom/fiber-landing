@@ -449,6 +449,57 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
+.integration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.integration-actions .btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0;
+}
+
+.btn-speednet {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-speednet small {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.82;
+}
+
+.btn-speednet:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 640px) {
+  .integration-actions {
+    flex-direction: column;
+  }
+
+  .integration-actions a {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
 /* =========================
    PATCHCORD CONFIGURADOR
    ========================= */
@@ -550,4 +601,3 @@ body {
   font-size: 14px;
   color: #666;
 }
-

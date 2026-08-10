@@ -1,5 +1,7 @@
 // js/expansions/sfp.js
 
+import { renderSpeednetActions } from "../integrations/speednet.js";
+
 export function renderSfp(container) {
   container.innerHTML = `
     <div class="expansion-panel">
@@ -43,7 +45,7 @@ export function renderSfp(container) {
 
         <p>
           Contamos con amplia experiencia en compatibilidad con fabricantes como
-          Cisco, Juniper, Extreme, Edgecore, HPE, Dell, Avaya, Aruba y Huawei,
+          Cisco, Dell, HPE, Intel, Juniper y Huawei,
           garantizando integración confiable en diferentes plataformas.
         </p>
 
@@ -52,16 +54,12 @@ export function renderSfp(container) {
           compatibilidad y estabilidad, optimizando el rendimiento de la red.
         </p>
 
-        <a 
-          href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20transceivers%20SFP%20y%20soluciones%20ópticas.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
-          class="btn-whatsapp"
-        >
-          Cotizar por WhatsApp
-        </a>
+        ${renderSpeednetActions({
+          journey: "sfp",
+          whatsappUrl: "https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20transceivers%20SFP%20y%20soluciones%20ópticas.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
+        })}
 
       </div>
     </div>
   `
 }
-

@@ -1,5 +1,7 @@
 // js/expansions/mc.js
 
+import { renderSpeednetActions } from "../integrations/speednet.js";
+
 export function renderMc(container) {
   container.innerHTML = `
     <div class="expansion-panel">
@@ -50,16 +52,12 @@ export function renderMc(container) {
           estabilidad, compatibilidad y facilidad de implementación en campo.
         </p>
 
-        <a 
-          href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20media%20converters%20fibra%20a%20ethernet.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
-          class="btn-whatsapp"
-        >
-          Cotizar por WhatsApp
-        </a>
+        ${renderSpeednetActions({
+          journey: "mc",
+          whatsappUrl: "https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20media%20converters%20fibra%20a%20ethernet.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
+        })}
 
       </div>
     </div>
   `
 }
-
