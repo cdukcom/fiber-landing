@@ -3,7 +3,7 @@
 export function renderCajaob(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cajaob.png" alt="Cajas OB y Muflas">
+      <img src="./img/fo/cajaob.webp" alt="Cajas OB y Muflas">
 
       <div class="expansion-content">
 
@@ -38,7 +38,7 @@ export function renderCajaob(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20cajas%20OB%20y%20muflas%20para%20fibra%20óptica.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -48,4 +48,3 @@ export function renderCajaob(container) {
     </div>
   `
 }
-

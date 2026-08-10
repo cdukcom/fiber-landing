@@ -51,6 +51,7 @@ body {
 
 .logo {
   height: 80px;
+  width: auto;
 }
 
 /* Nav */
@@ -195,6 +196,13 @@ body {
   transform: translateY(-6px) scale(1.02);
   border-color: var(--accent);
   box-shadow: 0 20px 40px rgba(15,23,42,0.08);
+}
+
+.card:focus-visible,
+.expansion-back:focus-visible,
+.nav a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 4px;
 }
 
 .card img {
@@ -405,11 +413,56 @@ body {
 
 .expansion-back {
   display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
   font-weight: 600;
   color: var(--accent);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s ease;
+}
+
+.expansion-panel--integrated {
+  display: block;
+  padding: 28px;
+}
+
+.expansion-panel--integrated .expansion-content {
+  width: 100%;
+}
+
+.expansion-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.expansion-intro {
+  margin: -8px 0 22px;
+}
+
+.speednet-embed {
+  width: 100%;
+  min-height: 900px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.speednet-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 900px;
+  border: 0;
+  background: #fff;
 }
 
 .expansion-back:hover {
@@ -600,4 +653,69 @@ body {
   margin-top: 10px;
   font-size: 14px;
   color: #666;
+}
+
+@media (max-width: 900px) {
+  .fiber-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .expansion-panel {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .speednet-embed,
+  .speednet-embed iframe {
+    min-height: 1040px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 14px;
+  }
+
+  .nav a {
+    margin-left: 0;
+  }
+
+  .section {
+    padding: 32px 0;
+  }
+
+  .fiber-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mega-container,
+  .expansion-panel--integrated {
+    padding: 14px;
+  }
+
+  .expansion-header {
+    align-items: flex-start;
+  }
+
+  .expansion-content h2 {
+    font-size: 23px;
+  }
+
+  .speednet-embed,
+  .speednet-embed iframe {
+    min-height: 1180px;
+  }
+
+  .footer {
+    margin-top: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }

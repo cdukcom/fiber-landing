@@ -1,4 +1,6 @@
-const SPEEDNET_BASE_URL = "https://www.speednetfo.com/";
+const SPEEDNET_BASE_URL = ["localhost", "127.0.0.1"].includes(window.location.hostname)
+  ? "http://127.0.0.1:8765/"
+  : "https://www.speednetfo.com/";
 
 const JOURNEYS = {
   sfp: {
@@ -21,18 +23,29 @@ function journeyUrl(journey) {
   return url.toString();
 }
 
-export function renderSpeednetActions({journey, whatsappUrl}) {
+function embeddedJourneyUrl(journey) {
+  const url = new URL(journeyUrl(journey));
+  url.searchParams.set("embed", "1");
+  return url.toString();
+}
+
+export function renderSpeednetExperience({journey, whatsappUrl}) {
   const config = JOURNEYS[journey];
   if (!config) return "";
 
   return `
+    <div class="speednet-embed" data-speednet-journey="${journey}">
+      <iframe
+        src="${embeddedJourneyUrl(journey)}"
+        title="${config.label}"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-downloads"
+      ></iframe>
+    </div>
     <div class="integration-actions">
-      <a class="btn-speednet" href="${journeyUrl(journey)}" target="_blank" rel="noopener">
-        <span>${config.label}</span>
-        <small>Herramienta especializada · abre en una pestaña nueva</small>
-      </a>
-      <a class="btn-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener">
-        Cotizar directamente por WhatsApp
+      <a class="btn-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer">
+        ¿Necesitas ayuda? Cotizar por WhatsApp
       </a>
     </div>
   `;

@@ -3,7 +3,7 @@
 export function renderCablefo(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cablefo.png" alt="Cable de fibra óptica">
+      <img src="./img/fo/cablefo.webp" alt="Cable de fibra óptica">
 
       <div class="expansion-content">
 
@@ -39,7 +39,7 @@ export function renderCablefo(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20cable%20de%20fibra%20óptica.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -49,4 +49,3 @@ export function renderCablefo(container) {
     </div>
   `
 }
-

@@ -3,7 +3,7 @@
 export function renderCableext(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cableext.png" alt="Cables exteriores y RG">
+      <img src="./img/fo/cableext.webp" alt="Cables exteriores y RG">
 
       <div class="expansion-content">
 
@@ -42,7 +42,7 @@ export function renderCableext(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20cables%20exteriores%20y%20cable%20RG.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp

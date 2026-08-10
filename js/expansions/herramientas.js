@@ -3,7 +3,7 @@
 export function renderHerramientas(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/herramientas.png" alt="Herramientas fibra óptica">
+      <img src="./img/fo/herramientas.webp" alt="Herramientas fibra óptica">
 
       <div class="expansion-content">
 
@@ -49,7 +49,7 @@ export function renderHerramientas(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20herramientas%20para%20fibra%20óptica.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -59,5 +59,3 @@ export function renderHerramientas(container) {
     </div>
   `
 }
-
-

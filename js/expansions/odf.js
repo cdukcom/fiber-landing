@@ -3,7 +3,7 @@
 export function renderOdf(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/odf.png" alt="ODF / Adaptadores / Kits">
+      <img src="./img/fo/odf.webp" alt="ODF / Adaptadores / Kits">
       
       <div class="expansion-content">
       
@@ -37,7 +37,7 @@ export function renderOdf(container) {
         
         <a 
           href="https://wa.me/573134991467?text=Hola,%20estoy%20interesado%20en%20ODF%20y%20adaptadores%20de%20fibra%20óptica.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -48,4 +48,3 @@ export function renderOdf(container) {
     </div>
   `
 }
-

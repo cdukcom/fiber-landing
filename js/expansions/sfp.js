@@ -1,65 +1,24 @@
-// js/expansions/sfp.js
-
-import { renderSpeednetActions } from "../integrations/speednet.js";
+import { renderSpeednetExperience } from "../integrations/speednet.js";
 
 export function renderSfp(container) {
   container.innerHTML = `
-    <div class="expansion-panel">
-      <img src="./img/activo/sfp.png" alt="SFP y Transceivers">
-
+    <div class="expansion-panel expansion-panel--integrated">
       <div class="expansion-content">
-
         <div class="expansion-header">
-          <h2>SFP y Transceivers</h2>
-          <div class="expansion-back">← Volver</div>
+          <div>
+            <span class="expansion-eyebrow">Speednet · Selección asistida</span>
+            <h2>SFP y transceptores ópticos</h2>
+          </div>
+          <button class="expansion-back" type="button">← Volver</button>
         </div>
-
-        <p>
-          Soluciones de conectividad óptica marca Speednet, reconocida por su calidad,
-          confiabilidad y amplia experiencia en integración con múltiples fabricantes
-          de equipos de red.
+        <p class="expansion-intro">
+          Selecciona velocidad, fibra, número de hilos y distancia sin abandonar Fiber Electronics.
         </p>
-
-        <p>
-          Nuestra mayor rotación se concentra en transceivers de 1G, 10G y 25G,
-          ideales para redes corporativas, centros de datos y telecomunicaciones.
-        </p>
-
-        <ul>
-          <li>SFP monomodo y multimodo de 1Gbps</li>
-          <li>SFP WDM monomodo de 1Gbps</li>
-          <li>SFP+ 10G multimodo</li>
-          <li>SFP28 25G multimodo</li>
-        </ul>
-
-        <p>
-          Adicionalmente, contamos con soluciones de mayor capacidad y aplicaciones especializadas:
-        </p>
-
-        <ul>
-          <li>QSFP+ 40G y QSFP28 100G multimodo</li>
-          <li>Transceivers monomodo de 10, 20 y 40Km</li>
-          <li>Soluciones de alta capacidad hasta 200G, 400G y 800G</li>
-          <li>Tecnologías CWDM y DWDM para multiplexación de enlaces</li>
-        </ul>
-
-        <p>
-          Contamos con amplia experiencia en compatibilidad con fabricantes como
-          Cisco, Dell, HPE, Intel, Juniper y Huawei,
-          garantizando integración confiable en diferentes plataformas.
-        </p>
-
-        <p>
-          Esta línea permite implementar enlaces de alta velocidad con total
-          compatibilidad y estabilidad, optimizando el rendimiento de la red.
-        </p>
-
-        ${renderSpeednetActions({
+        ${renderSpeednetExperience({
           journey: "sfp",
           whatsappUrl: "https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20transceivers%20SFP%20y%20soluciones%20ópticas.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
         })}
-
       </div>
     </div>
-  `
+  `;
 }

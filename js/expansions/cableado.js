@@ -3,7 +3,7 @@
 export function renderCableado(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cableado.png" alt="Cableado estructurado Cat 5e, 6 y 6A">
+      <img src="./img/fo/cableado.webp" alt="Cableado estructurado Cat 5e, 6 y 6A">
 
       <div class="expansion-content">
 
@@ -39,7 +39,7 @@ export function renderCableado(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20soluciones%20de%20cableado%20estructurado%20Cat6A.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -49,4 +49,3 @@ export function renderCableado(container) {
     </div>
   `
 }
-

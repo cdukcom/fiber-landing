@@ -22,7 +22,7 @@ export function renderPatchcord(container) {
 
       <!-- VISUAL -->
       <div class="pc-visual">
-        <img id="pc-image" src="/img/patchcord-types/om3.png" class="pc-image"/>
+        <img id="pc-image" src="/img/patchcord-types/om3.webp" class="pc-image" alt="Patch cord configurado"/>
       </div>
 
       <div class="expansion-content">
@@ -81,7 +81,7 @@ export function renderPatchcord(container) {
           Dale click al botón de WhatsApp para que te ayudemos con la cotización.
         </div>
 
-        <a id="pc-whatsapp" target="_blank" class="btn-whatsapp">
+        <a id="pc-whatsapp" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
           Cotizar por WhatsApp
         </a>
 
@@ -130,7 +130,7 @@ export function renderPatchcord(container) {
 
     function updateImage() {
       const type = subtype.value.toLowerCase()
-      img.src = `/img/patchcord-types/${type}.png`
+      img.src = `/img/patchcord-types/${type}.webp`
     }
 
     // =========================

@@ -3,7 +3,7 @@
 export function renderRack(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/rack.png" alt="Racks y Gabinetes">
+      <img src="./img/fo/rack.webp" alt="Racks y Gabinetes">
 
       <div class="expansion-content">
 
@@ -38,7 +38,7 @@ export function renderRack(container) {
 
         <a 
           href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20racks%20y%20gabinetes%20para%20redes.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           class="btn-whatsapp"
         >
           Cotizar por WhatsApp
@@ -48,4 +48,3 @@ export function renderRack(container) {
     </div>
   `
 }
-

@@ -103,8 +103,7 @@ function closeExpansion(container, grid) {
 // ============================
 
 document.querySelectorAll('.card').forEach(card => {
-
-  card.addEventListener('click', () => {
+  const activate = () => {
 
     const key = card.dataset.link
     const renderFn = renderMap[key]
@@ -123,8 +122,15 @@ document.querySelectorAll('.card').forEach(card => {
 
     openExpansion(container, grid, renderFn, card)
 
+  }
+
+  card.addEventListener('click', activate)
+  card.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      activate()
+    }
   })
 
 })
-
 
