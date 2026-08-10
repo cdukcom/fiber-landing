@@ -26,6 +26,7 @@ function journeyUrl(journey) {
 function embeddedJourneyUrl(journey) {
   const url = new URL(journeyUrl(journey));
   url.searchParams.set("embed", "1");
+  url.searchParams.set("source", "fibersas");
   return url.toString();
 }
 
@@ -40,7 +41,7 @@ export function renderSpeednetExperience({journey, whatsappUrl}) {
         title="${config.label}"
         loading="lazy"
         referrerpolicy="strict-origin-when-cross-origin"
-        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads allow-modals"
       ></iframe>
     </div>
     <div class="integration-actions">

@@ -1,4 +1,4 @@
-import { renderSpeednetExperience } from "../integrations/speednet.js";
+import { renderSpeednetExperience } from "../integrations/speednet.js?v=20260810-3";
 
 export function renderMc(container) {
   container.innerHTML = `
