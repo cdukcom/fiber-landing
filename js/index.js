@@ -17,6 +17,27 @@ import { renderSwitch } from './expansions/switch.js'
 import { renderMc } from './expansions/mc.js'
 import { renderSfp } from './expansions/sfp.js'
 
+function addFiberOrigin(urlValue) {
+  try {
+    const url = new URL(urlValue, window.location.href)
+    if (!url.hostname.endsWith('wa.me')) return urlValue
+
+    const message = url.searchParams.get('text')?.trim() || ''
+    if (!message.includes('Origen: fibersas.com')) {
+      url.searchParams.set('text', `${message}\n\nOrigen: fibersas.com`.trim())
+    }
+    return url.toString()
+  } catch {
+    return urlValue
+  }
+}
+
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href*="wa.me/"]')
+  if (!link) return
+  link.href = addFiberOrigin(link.href)
+})
+
 // ============================
 // MAPA
 // ============================
@@ -133,4 +154,3 @@ document.querySelectorAll('.card').forEach(card => {
   })
 
 })
-
