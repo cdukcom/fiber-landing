@@ -40,7 +40,7 @@ export function renderSpeednetExperience({journey, whatsappUrl}) {
         title="${config.label}"
         loading="lazy"
         referrerpolicy="strict-origin-when-cross-origin"
-        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-downloads"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"
       ></iframe>
     </div>
     <div class="integration-actions">
