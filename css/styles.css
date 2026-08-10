@@ -94,6 +94,7 @@ body {
   background: #f8fafc;
 }
 
+.section h1,
 .section h2 {
   font-size: 32px;
   font-weight: 700;
