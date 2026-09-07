@@ -87,6 +87,10 @@ export function renderPatchcord(container, initial = {}) {
           Cotizar por WhatsApp
         </a>
 
+        <button id="pc-copy-link" type="button" class="btn-disabled">
+          Copiar enlace de esta configuración
+        </button>
+
         <button class="btn-disabled">
           Agregar a BOMaker (próximamente)
         </button>
@@ -113,6 +117,7 @@ export function renderPatchcord(container, initial = {}) {
     const info = container.querySelector('#pc-info')
     const btn = container.querySelector('#pc-whatsapp')
     const img = container.querySelector('#pc-image')
+    const copyLink = container.querySelector('#pc-copy-link')
 
     // =========================
     // SUBTIPOS
@@ -187,9 +192,23 @@ export function renderPatchcord(container, initial = {}) {
     // =========================
 
     function trackSelection() {
-      track('selector_change', {line:'patchcord', reference:`${subtype.value}-${mode.value}-${connA.value}-${connB.value}-${length.value}m`})
+      const reference = `${subtype.value}-${mode.value}-${connA.value}-${connB.value}-${length.value}m`
+      track('selector_change', {line:'patchcord', reference})
       history.replaceState({}, '', selectedPath())
+      track('configuration_complete', {line:'patchcord', reference, metadata:{configurationPath:selectedPath()}})
     }
+
+    copyLink.addEventListener('click', async () => {
+      const url = new URL(selectedPath(), location.origin).href
+      try {
+        await navigator.clipboard.writeText(url)
+        copyLink.textContent = '✓ Enlace copiado'
+        track('configuration_url_copied', {line:'patchcord', reference:result.innerText, metadata:{configurationPath:selectedPath()}})
+        setTimeout(() => { copyLink.textContent = 'Copiar enlace de esta configuración' }, 1800)
+      } catch {
+        window.prompt('Copia este enlace:', url)
+      }
+    })
 
     family.addEventListener('change', () => {
       loadSubtypes()

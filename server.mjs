@@ -12,7 +12,7 @@ const adminUser = process.env.ADMIN_USER || "admin";
 const adminPassword = process.env.ADMIN_PASSWORD || "admin";
 const pool = process.env.DATABASE_URL ? new Pool({connectionString:process.env.DATABASE_URL,ssl:production?{rejectUnauthorized:false}:false}) : null;
 const attempts = new Map();
-const allowedEvents = new Set(["page_view","line_view","selector_open","selector_change","reference_view","outbound_tool","whatsapp_click","email_click","datasheet_download"]);
+const allowedEvents = new Set(["page_view","line_view","selector_open","selector_change","reference_view","outbound_tool","whatsapp_click","email_click","datasheet_download","configuration_complete","configuration_url_copied"]);
 const mime = {".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".json":"application/json; charset=utf-8",".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",".webp":"image/webp",".pdf":"application/pdf",".txt":"text/plain; charset=utf-8",".xml":"application/xml; charset=utf-8",".ico":"image/x-icon"};
 const patchcordRoutes = JSON.parse(await readFile(join(root,"data/patchcord-routes.json"),"utf8"));
 const routeMap = new Map(patchcordRoutes.map(item => [item.path,item]));
@@ -56,12 +56,13 @@ async function renderPage(item) { let html=await readFile(join(root,"index.html"
 async function overview(daysValue) {
   if(!pool) return {configured:false,totals:{},trend:[],topLines:[],topReferences:[],topSources:[],recent:[]};
   const days=Math.min(Math.max(Number(daysValue)||30,1),365),cutoff=Date.now()-days*86400000;
-  const result=await pool.query(`SELECT event_type,path,line,reference,source,metadata,created_at FROM fiber_events ORDER BY created_at DESC LIMIT 100000`);
-  const totals={},daily=new Map(),lines=new Map(),references=new Map(),sources=new Map(),recent=[];
+  const result=await pool.query(`SELECT event_type,path,line,reference,session_id,source,metadata,created_at FROM fiber_events ORDER BY created_at DESC LIMIT 100000`);
+  const totals={},daily=new Map(),lines=new Map(),references=new Map(),sources=new Map(),landings=new Map(),seenSessions=new Set(),recent=[];
   const count=(map,key)=>{if(key)map.set(key,(map.get(key)||0)+1)};
   for(const row of result.rows){
     const date=new Date(row.created_at); if(!Number.isFinite(date.getTime())||date.getTime()<cutoff)continue;
     totals[row.event_type]=(totals[row.event_type]||0)+1;
+    if(row.event_type==='page_view'&&row.session_id&&!seenSessions.has(row.session_id)){seenSessions.add(row.session_id);if(parsePatchcordPath(row.path))count(landings,row.path)}
     if(recent.length<50)recent.push({...row,created_at:date.toISOString()});
     const day=date.toISOString().slice(0,10),item=daily.get(day)||{day,views:0,consultations:0,whatsapp:0};
     if(row.event_type==='page_view')item.views++;
@@ -70,12 +71,21 @@ async function overview(daysValue) {
     daily.set(day,item); count(lines,row.line); count(references,row.reference); count(sources,row.source||'direct');
   }
   const ranked=map=>[...map].map(([label,count])=>({label,count})).sort((a,b)=>b.count-a.count).slice(0,10);
-  return {configured:true,days,totals,trend:[...daily.values()].sort((a,b)=>a.day.localeCompare(b.day)),topLines:ranked(lines),topReferences:ranked(references),topSources:ranked(sources),recent};
+  return {configured:true,days,totals,trend:[...daily.values()].sort((a,b)=>a.day.localeCompare(b.day)),topLines:ranked(lines),topReferences:ranked(references),topSources:ranked(sources),topLandings:ranked(landings).slice(0,5),recent};
+}
+
+async function popularConfigurations(){
+  if(!pool) return patchcordRoutes.slice(0,5).map(item=>({path:item.path,label:titleFor(item),count:0}));
+  const result=await pool.query(`SELECT DISTINCT ON (session_id) session_id,path,created_at FROM fiber_events WHERE event_type='page_view' AND session_id IS NOT NULL AND created_at >= NOW()-INTERVAL '30 days' ORDER BY session_id,created_at ASC`);
+  const counts=new Map(); for(const row of result.rows){if(parsePatchcordPath(row.path))counts.set(row.path,(counts.get(row.path)||0)+1)}
+  const ranked=[...counts].sort((a,b)=>b[1]-a[1]).slice(0,5).map(([path,count])=>({path,label:titleFor(parsePatchcordPath(path)).replace(' | Fiber Electronics',''),count}));
+  return ranked.length?ranked:patchcordRoutes.slice(0,5).map(item=>({path:item.path,label:titleFor(item).replace(' | Fiber Electronics',''),count:0}));
 }
 
 const server=createServer(async(req,res)=>{ try {
   const url=new URL(req.url,`http://${req.headers.host||"localhost"}`);
   if(url.pathname==="/api/health") return json(res,200,{ok:true,database:Boolean(pool),service:"fiber"});
+  if(url.pathname==="/api/popular-configurations") return json(res,200,{items:await popularConfigurations()});
   if(url.pathname==="/sitemap.xml") { res.writeHead(200,{"content-type":"application/xml; charset=utf-8","cache-control":"public, max-age=3600"}); return res.end(sitemap()); }
   if(url.pathname==="/api/events"&&req.method==="POST") { const data=await body(req); if(!allowedEvents.has(data.type)) return json(res,400,{error:"Unsupported event"}); const values=[data.type,clean(data.path,300),clean(data.line,80)||null,clean(data.reference,160)||null,clean(data.sessionId,80),clean(data.source,100)||null,data.metadata&&typeof data.metadata==="object"?data.metadata:{}]; if(pool) await pool.query(`INSERT INTO fiber_events(event_type,path,line,reference,session_id,source,metadata) VALUES($1,$2,$3,$4,$5,$6,$7)`,values); return json(res,202,{ok:true}); }
   if(url.pathname==="/api/admin/login"&&req.method==="POST") { if(!sameOrigin(req)) return json(res,403,{error:"Invalid origin"}); const ip=req.socket.remoteAddress||"unknown",record=attempts.get(ip)||{count:0,reset:Date.now()+600000}; if(record.reset<Date.now()) Object.assign(record,{count:0,reset:Date.now()+600000}); if(record.count>=8) return json(res,429,{error:"Too many attempts"}); const data=await body(req); if(data.username!==adminUser||!validPassword(data.password)){record.count++;attempts.set(ip,record);return json(res,401,{error:"Invalid credentials"});} attempts.delete(ip); const token=sign({user:adminUser,exp:Date.now()+12*60*60*1000,nonce:randomBytes(8).toString("hex")}); return json(res,200,{ok:true},{"set-cookie":`fiber_admin=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=43200${production?"; Secure":""}`}); }
