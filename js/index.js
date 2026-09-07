@@ -16,6 +16,9 @@ import { renderHerramientas } from './expansions/herramientas.js'
 import { renderSwitch } from './expansions/switch.js'
 import { renderMc } from './expansions/mc.js'
 import { renderSfp } from './expansions/sfp.js'
+import { track } from './analytics.js'
+
+track('page_view')
 
 function addFiberOrigin(urlValue) {
   try {
@@ -35,6 +38,7 @@ function addFiberOrigin(urlValue) {
 document.addEventListener('click', event => {
   const link = event.target.closest('a[href*="wa.me/"]')
   if (!link) return
+  track('whatsapp_click', {line: link.dataset.line || 'general', reference: link.dataset.reference || ''})
   link.href = addFiberOrigin(link.href)
 })
 
@@ -70,7 +74,7 @@ const activeExpansion = document.getElementById('active-expansion')
 // CORE
 // ============================
 
-function openExpansion(container, grid, renderFn, card) {
+function openExpansion(container, grid, renderFn, card, options = {}) {
 
   // animar grid
   grid.classList.add('fade-out')
@@ -83,7 +87,7 @@ function openExpansion(container, grid, renderFn, card) {
     grid.style.display = 'none'
 
     container.innerHTML = ''
-    renderFn(container)
+    renderFn(container, options)
 
     container.classList.add('active')
 
@@ -124,7 +128,8 @@ function closeExpansion(container, grid) {
 // ============================
 
 document.querySelectorAll('.card').forEach(card => {
-  const activate = () => {
+  const activate = event => {
+    event?.preventDefault()
 
     const key = card.dataset.link
     const renderFn = renderMap[key]
@@ -141,6 +146,7 @@ document.querySelectorAll('.card').forEach(card => {
       grid = activeGrid
     }
 
+    track('line_view', {line:key})
     openExpansion(container, grid, renderFn, card)
 
   }
@@ -154,3 +160,11 @@ document.querySelectorAll('.card').forEach(card => {
   })
 
 })
+
+const routedPatchcord = document.body.dataset.patchcordRoute
+if (routedPatchcord) {
+  const card = document.querySelector('[data-link="patchcord"]')
+  const options = JSON.parse(routedPatchcord)
+  track(options.mode ? 'reference_view' : 'line_view', {line:'patchcord', reference:options.mode ? `${options.subtype}-${options.mode}-${options.connA}-${options.connB}-${options.length}m` : options.subtype})
+  openExpansion(fiberExpansion, fiberGrid, renderPatchcord, card, options)
+}

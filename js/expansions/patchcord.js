@@ -15,7 +15,9 @@ const LENGTHS = [1,2,3,5,10,15,20,25,40,50,80,100]
 // RENDER
 // =========================
 
-export function renderPatchcord(container) {
+import { track } from '../analytics.js'
+
+export function renderPatchcord(container, initial = {}) {
 
   container.innerHTML = `
     <div class="expansion-panel">
@@ -169,24 +171,44 @@ export function renderPatchcord(container) {
 
       const message = encodeURIComponent(`Hola, quiero cotizar:\n${text}`)
       btn.href = `https://wa.me/573134991444?text=${message}`
+      btn.dataset.line = 'patchcord'
+      btn.dataset.reference = text
 
       buildInfo()
+    }
+
+    function selectedPath() {
+      const familySlug = family.value === 'MM' ? 'multimodo' : 'monomodo'
+      return `/patch-cords/${familySlug}/${subtype.value.toLowerCase()}/${mode.value.toLowerCase()}/${connA.value.toLowerCase()}-${connB.value.toLowerCase()}-${length.value}m/`
     }
 
     // =========================
     // EVENTOS
     // =========================
 
+    function trackSelection() {
+      track('selector_change', {line:'patchcord', reference:`${subtype.value}-${mode.value}-${connA.value}-${connB.value}-${length.value}m`})
+      history.replaceState({}, '', selectedPath())
+    }
+
     family.addEventListener('change', () => {
       loadSubtypes()
       update()
+      trackSelection()
     })
 
     ;[subtype, mode, connA, connB, length].forEach(el => {
-      el.addEventListener('change', update)
+      el.addEventListener('change', () => { update(); trackSelection() })
     })
 
     loadSubtypes()
+    if (initial.family) family.value = initial.family
+    loadSubtypes()
+    if (initial.subtype) subtype.value = initial.subtype
+    if (initial.mode) mode.value = initial.mode
+    if (initial.connA) connA.value = initial.connA
+    if (initial.connB) connB.value = initial.connB
+    if (initial.length) length.value = String(initial.length)
     update()
 
   }, 0)

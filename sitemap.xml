@@ -3,6 +3,12 @@
 
   <url>
     <loc>https://www.fibersas.com/</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-07</lastmod>
   </url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om3/</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om4/</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om3/duplex/lc-lc-1m/</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om3/duplex/lc-lc-2m/</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om3/duplex/lc-sc-5m/</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://www.fibersas.com/patch-cords/multimodo/om4/duplex/lc-lc-10m/</loc><lastmod>2026-09-07</lastmod></url>
 </urlset>

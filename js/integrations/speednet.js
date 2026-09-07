@@ -1,3 +1,5 @@
+import { track } from '../analytics.js';
+
 const SPEEDNET_BASE_URL = ["localhost", "127.0.0.1"].includes(window.location.hostname)
   ? "http://127.0.0.1:8765/"
   : "https://www.speednetfo.com/";
@@ -34,6 +36,7 @@ export function renderSpeednetExperience({journey, whatsappUrl}) {
   const config = JOURNEYS[journey];
   if (!config) return "";
 
+  track('outbound_tool', {line:journey, metadata:{destination:'speednetfo.com', journey}});
   return `
     <div class="speednet-embed" data-speednet-journey="${journey}">
       <iframe

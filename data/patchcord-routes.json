@@ -1,0 +1,8 @@
+[
+  {"path":"/patch-cords/multimodo/om3/","family":"MM","subtype":"OM3"},
+  {"path":"/patch-cords/multimodo/om4/","family":"MM","subtype":"OM4"},
+  {"path":"/patch-cords/multimodo/om3/duplex/lc-lc-1m/","family":"MM","subtype":"OM3","mode":"Duplex","connA":"LC","connB":"LC","length":1},
+  {"path":"/patch-cords/multimodo/om3/duplex/lc-lc-2m/","family":"MM","subtype":"OM3","mode":"Duplex","connA":"LC","connB":"LC","length":2},
+  {"path":"/patch-cords/multimodo/om3/duplex/lc-sc-5m/","family":"MM","subtype":"OM3","mode":"Duplex","connA":"LC","connB":"SC","length":5},
+  {"path":"/patch-cords/multimodo/om4/duplex/lc-lc-10m/","family":"MM","subtype":"OM4","mode":"Duplex","connA":"LC","connB":"LC","length":10}
+]
