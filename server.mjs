@@ -51,16 +51,22 @@ async function renderPage(item) { let html=await readFile(join(root,"index.html"
 
 async function overview(daysValue) {
   if(!pool) return {configured:false,totals:{},trend:[],topLines:[],topReferences:[],topSources:[],recent:[]};
-  const days=Math.min(Math.max(Number(daysValue)||30,1),365), interval=`${days} days`;
-  const [totals,trend,lines,references,sources,recent]=await Promise.all([
-    pool.query(`SELECT event_type,COUNT(*)::int total FROM fiber_events WHERE created_at>=NOW()-$1::interval GROUP BY event_type`,[interval]),
-    pool.query(`SELECT TO_CHAR(day,'YYYY-MM-DD') day,COUNT(e.id) FILTER(WHERE event_type='page_view')::int views,COUNT(e.id) FILTER(WHERE event_type IN('line_view','reference_view'))::int consultations,COUNT(e.id) FILTER(WHERE event_type='whatsapp_click')::int whatsapp FROM generate_series(CURRENT_DATE-($1::int-1),CURRENT_DATE,'1 day') day LEFT JOIN fiber_events e ON e.created_at>=day AND e.created_at<day+INTERVAL '1 day' GROUP BY day ORDER BY day`,[days]),
-    pool.query(`SELECT line label,COUNT(*)::int count FROM fiber_events WHERE line IS NOT NULL AND created_at>=NOW()-$1::interval GROUP BY line ORDER BY count DESC LIMIT 10`,[interval]),
-    pool.query(`SELECT reference label,COUNT(*)::int count FROM fiber_events WHERE reference IS NOT NULL AND created_at>=NOW()-$1::interval GROUP BY reference ORDER BY count DESC LIMIT 10`,[interval]),
-    pool.query(`SELECT COALESCE(source,'direct') label,COUNT(*)::int count FROM fiber_events WHERE created_at>=NOW()-$1::interval GROUP BY source ORDER BY count DESC LIMIT 10`,[interval]),
-    pool.query(`SELECT event_type,path,line,reference,source,metadata,created_at FROM fiber_events ORDER BY created_at DESC LIMIT 50`)
-  ]);
-  return {configured:true,days,totals:Object.fromEntries(totals.rows.map(r=>[r.event_type,r.total])),trend:trend.rows,topLines:lines.rows,topReferences:references.rows,topSources:sources.rows,recent:recent.rows};
+  const days=Math.min(Math.max(Number(daysValue)||30,1),365),cutoff=Date.now()-days*86400000;
+  const result=await pool.query(`SELECT event_type,path,line,reference,source,metadata,created_at FROM fiber_events ORDER BY created_at DESC LIMIT 100000`);
+  const totals={},daily=new Map(),lines=new Map(),references=new Map(),sources=new Map(),recent=[];
+  const count=(map,key)=>{if(key)map.set(key,(map.get(key)||0)+1)};
+  for(const row of result.rows){
+    const date=new Date(row.created_at); if(!Number.isFinite(date.getTime())||date.getTime()<cutoff)continue;
+    totals[row.event_type]=(totals[row.event_type]||0)+1;
+    if(recent.length<50)recent.push({...row,created_at:date.toISOString()});
+    const day=date.toISOString().slice(0,10),item=daily.get(day)||{day,views:0,consultations:0,whatsapp:0};
+    if(row.event_type==='page_view')item.views++;
+    if(row.event_type==='line_view'||row.event_type==='reference_view')item.consultations++;
+    if(row.event_type==='whatsapp_click')item.whatsapp++;
+    daily.set(day,item); count(lines,row.line); count(references,row.reference); count(sources,row.source||'direct');
+  }
+  const ranked=map=>[...map].map(([label,count])=>({label,count})).sort((a,b)=>b.count-a.count).slice(0,10);
+  return {configured:true,days,totals,trend:[...daily.values()].sort((a,b)=>a.day.localeCompare(b.day)),topLines:ranked(lines),topReferences:ranked(references),topSources:ranked(sources),recent};
 }
 
 const server=createServer(async(req,res)=>{ try {
@@ -75,5 +81,5 @@ const server=createServer(async(req,res)=>{ try {
   if(url.pathname.startsWith("/patch-cords/")) { if(!item) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(item); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
   let requested=url.pathname==="/"?"/index.html":url.pathname==="/admin"||url.pathname==="/admin/"?"/admin.html":url.pathname;
   const safe=normalize(requested).replace(/^(\.\.(\/|\\|$))+/g,""); const file=join(root,safe); if(!file.startsWith(root)) return json(res,403,{error:"Forbidden"}); const info=await stat(file); if(!info.isFile()) throw Object.assign(new Error("Not found"),{code:"ENOENT"}); res.writeHead(200,{"content-type":mime[extname(file).toLowerCase()]||"application/octet-stream","cache-control":production&&!file.endsWith(".html")?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); res.end(await readFile(file));
-} catch(error) { const notFound=error?.code==="ENOENT"; if(!res.headersSent) json(res,notFound?404:500,{error:notFound?"Not found":"Server error"}); else res.end(); }});
+} catch(error) { console.error('Request failed',req.method,req.url,error); const notFound=error?.code==="ENOENT"; if(!res.headersSent) json(res,notFound?404:500,{error:notFound?"Not found":"Server error"}); else res.end(); }});
 server.listen(port,()=>console.log(`Fiber Electronics listening on ${port}`));
