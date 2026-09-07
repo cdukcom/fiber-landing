@@ -3,7 +3,7 @@
 export function renderCajaob(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cajaob.webp" alt="Cajas OB y Muflas">
+      <img src="/img/fo/cajaob.webp" alt="Cajas OB y Muflas">
 
       <div class="expansion-content">
 

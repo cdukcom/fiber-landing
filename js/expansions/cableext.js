@@ -3,7 +3,7 @@
 export function renderCableext(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cableext.webp" alt="Cables exteriores y RG">
+      <img src="/img/fo/cableext.webp" alt="Cables exteriores y RG">
 
       <div class="expansion-content">
 

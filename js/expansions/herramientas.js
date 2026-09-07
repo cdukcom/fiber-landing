@@ -3,7 +3,7 @@
 export function renderHerramientas(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/herramientas.webp" alt="Herramientas fibra óptica">
+      <img src="/img/fo/herramientas.webp" alt="Herramientas fibra óptica">
 
       <div class="expansion-content">
 

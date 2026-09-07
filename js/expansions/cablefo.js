@@ -3,7 +3,7 @@
 export function renderCablefo(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cablefo.webp" alt="Cable de fibra óptica">
+      <img src="/img/fo/cablefo.webp" alt="Cable de fibra óptica">
 
       <div class="expansion-content">
 

@@ -3,7 +3,7 @@
 export function renderCableado(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/cableado.webp" alt="Cableado estructurado Cat 5e, 6 y 6A">
+      <img src="/img/fo/cableado.webp" alt="Cableado estructurado Cat 5e, 6 y 6A">
 
       <div class="expansion-content">
 

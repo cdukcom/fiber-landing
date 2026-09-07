@@ -3,7 +3,7 @@
 export function renderOdf(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/odf.webp" alt="ODF / Adaptadores / Kits">
+      <img src="/img/fo/odf.webp" alt="ODF / Adaptadores / Kits">
       
       <div class="expansion-content">
       

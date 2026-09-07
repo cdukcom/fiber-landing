@@ -3,7 +3,7 @@
 export function renderSwitch(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/activo/switch.webp" alt="Switches industriales y empresariales">
+      <img src="/img/activo/switch.webp" alt="Switches industriales y empresariales">
 
       <div class="expansion-content">
 

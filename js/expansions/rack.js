@@ -3,7 +3,7 @@
 export function renderRack(container) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="./img/fo/rack.webp" alt="Racks y Gabinetes">
+      <img src="/img/fo/rack.webp" alt="Racks y Gabinetes">
 
       <div class="expansion-content">
 
