@@ -168,3 +168,12 @@ if (routedPatchcord) {
   track(options.mode ? 'reference_view' : 'line_view', {line:'patchcord', reference:options.mode ? `${options.subtype}-${options.mode}-${options.connA}-${options.connB}-${options.length}m` : options.subtype})
   openExpansion(fiberExpansion, fiberGrid, renderPatchcord, card, options)
 }
+
+const routedCable = document.body.dataset.cableRoute
+if (routedCable) {
+  const card = document.querySelector('[data-link="cablefo"]')
+  const options = JSON.parse(routedCable)
+  const reference = `${options.fiber}-${options.construction}-${options.count}-hilos`
+  track('reference_view', {line:'cablefo', reference})
+  openExpansion(fiberExpansion, fiberGrid, renderCablefo, card, options)
+}

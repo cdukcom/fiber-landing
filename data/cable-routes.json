@@ -1,0 +1,11 @@
+[
+  {"path":"/cables-fibra/monomodo-armada-os2-12-hilos/","slug":"monomodo-armada-os2-12-hilos","family":"SM","construction":"armada","fiber":"OS2","count":12},
+  {"path":"/cables-fibra/multimodo-indoor-outdoor-om3-6-hilos/","slug":"multimodo-indoor-outdoor-om3-6-hilos","family":"MM","construction":"indoor-outdoor","fiber":"OM3","count":6},
+  {"path":"/cables-fibra/multimodo-indoor-outdoor-om3-12-hilos/","slug":"multimodo-indoor-outdoor-om3-12-hilos","family":"MM","construction":"indoor-outdoor","fiber":"OM3","count":12},
+  {"path":"/cables-fibra/multimodo-indoor-outdoor-om4-6-hilos/","slug":"multimodo-indoor-outdoor-om4-6-hilos","family":"MM","construction":"indoor-outdoor","fiber":"OM4","count":6},
+  {"path":"/cables-fibra/multimodo-indoor-outdoor-om4-12-hilos/","slug":"multimodo-indoor-outdoor-om4-12-hilos","family":"MM","construction":"indoor-outdoor","fiber":"OM4","count":12},
+  {"path":"/cables-fibra/multimodo-armada-om3-6-hilos/","slug":"multimodo-armada-om3-6-hilos","family":"MM","construction":"armada","fiber":"OM3","count":6},
+  {"path":"/cables-fibra/multimodo-armada-om3-12-hilos/","slug":"multimodo-armada-om3-12-hilos","family":"MM","construction":"armada","fiber":"OM3","count":12},
+  {"path":"/cables-fibra/multimodo-armada-om4-6-hilos/","slug":"multimodo-armada-om4-6-hilos","family":"MM","construction":"armada","fiber":"OM4","count":6},
+  {"path":"/cables-fibra/multimodo-armada-om4-12-hilos/","slug":"multimodo-armada-om4-12-hilos","family":"MM","construction":"armada","fiber":"OM4","count":12}
+]

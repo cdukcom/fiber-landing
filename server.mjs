@@ -16,6 +16,8 @@ const allowedEvents = new Set(["page_view","line_view","selector_open","selector
 const mime = {".html":"text/html; charset=utf-8",".js":"text/javascript; charset=utf-8",".css":"text/css; charset=utf-8",".json":"application/json; charset=utf-8",".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",".webp":"image/webp",".pdf":"application/pdf",".txt":"text/plain; charset=utf-8",".xml":"application/xml; charset=utf-8",".ico":"image/x-icon"};
 const patchcordRoutes = JSON.parse(await readFile(join(root,"data/patchcord-routes.json"),"utf8"));
 const routeMap = new Map(patchcordRoutes.map(item => [item.path,item]));
+const cableRoutes = JSON.parse(await readFile(join(root,"data/cable-routes.json"),"utf8"));
+const cableRouteMap = new Map(cableRoutes.map(item => [item.path,item]));
 const validLengths = new Set([1,2,3,5,10,15,20,25,40,50,80,100]);
 function parsePatchcordPath(pathname) {
   if (routeMap.has(pathname)) return routeMap.get(pathname);
@@ -25,6 +27,7 @@ function parsePatchcordPath(pathname) {
   if(!validLengths.has(length)||(familySlug==="multimodo"&&subtype.toLowerCase()==="os2")||(familySlug==="monomodo"&&subtype.toLowerCase()!=="os2")) return null;
   return {path:pathname,family:familySlug==="multimodo"?"MM":"SM",subtype:subtype.toUpperCase(),mode:mode[0].toUpperCase()+mode.slice(1).toLowerCase(),connA:connA.toUpperCase(),connB:connB.toUpperCase(),length};
 }
+function parseCablePath(pathname) { return cableRouteMap.get(pathname) || null; }
 
 if (production && (!process.env.VERIFY_SECRET || !process.env.ADMIN_PASSWORD)) throw new Error("VERIFY_SECRET and ADMIN_PASSWORD are required in production");
 if (pool) {
@@ -44,14 +47,14 @@ function adminSession(req) { try { const [payload,supplied]=String(cookies(req).
 function validPassword(value) { const salt="fiber-admin"; return timingSafeEqual(scryptSync(String(value),salt,64),scryptSync(adminPassword,salt,64)); }
 function sameOrigin(req) { const origin=req.headers.origin; return !origin||origin===`${req.headers["x-forwarded-proto"]||"http"}://${req.headers.host}`; }
 function clean(value,max=200) { return String(value||"").trim().slice(0,max); }
-function titleFor(item) { if(!item) return "Fiber Electronics | Fibra óptica, SFP y conectividad"; if(!item.mode) return `Patch Cords Multimodo ${item.subtype} | Fiber Electronics`; return `Patch Cord ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} m | Fiber Electronics`; }
-function descriptionFor(item) { if(!item.mode) return `Encuentra patch cords multimodo ${item.subtype} por conectores y longitud. Selecciona la referencia que necesitas y solicita atención por WhatsApp.`; return `Consulta el patch cord multimodo ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} metros y solicita cotización y coordinación de envío por WhatsApp.`; }
+function titleFor(item) { if(!item) return "Fiber Electronics | Fibra óptica, SFP y conectividad"; if(item.slug) return `Cable ${item.family==='SM'?'Monomodo':'Multimodo'} ${item.fiber} ${item.count} hilos ${item.construction==='armada'?'Armado':'Indoor/Outdoor'} | Fiber Electronics`; if(!item.mode) return `Patch Cords Multimodo ${item.subtype} | Fiber Electronics`; return `Patch Cord ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} m | Fiber Electronics`; }
+function descriptionFor(item) { if(item?.slug) return `Consulta la ficha técnica del cable ${item.family==='SM'?'monomodo':'multimodo'} ${item.fiber} de ${item.count} hilos, ${item.construction==='armada'?'armado para exteriores':'para uso interior y exterior'}, disponible por metros.`; if(!item.mode) return `Encuentra patch cords multimodo ${item.subtype} por conectores y longitud. Selecciona la referencia que necesitas y solicita atención por WhatsApp.`; return `Consulta el patch cord multimodo ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} metros y solicita cotización y coordinación de envío por WhatsApp.`; }
 function escapeAttr(value) { return String(value).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("'","&#39;").replaceAll("<","&lt;"); }
 function sitemap() {
-  const urls=["/",...patchcordRoutes.map(item=>item.path)];
+  const urls=["/",...patchcordRoutes.map(item=>item.path),...cableRoutes.map(item=>item.path)];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(path=>`  <url><loc>https://www.fibersas.com${path}</loc><lastmod>2026-09-07</lastmod></url>`).join("\n")}\n</urlset>\n`;
 }
-async function renderPage(item) { let html=await readFile(join(root,"index.html"),"utf8"); if(!item) return html; const title=titleFor(item),description=descriptionFor(item),url=`https://www.fibersas.com${item.path}`; html=html.replace(/<title>.*?<\/title>/s,`<title>${escapeAttr(title)}</title>`).replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${escapeAttr(description)}">`).replace(/<link rel="canonical" href="[^"]*">/,`<link rel="canonical" href="${url}">`).replace(/<meta property="og:title" content="[^"]*">/,`<meta property="og:title" content="${escapeAttr(title)}">`).replace(/<meta property="og:description" content="[^"]*">/,`<meta property="og:description" content="${escapeAttr(description)}">`).replace(/<meta property="og:url" content="[^"]*">/,`<meta property="og:url" content="${url}">`).replace("<body>",`<body data-patchcord-route='${escapeAttr(JSON.stringify(item))}'>`); return html; }
+async function renderPage(item, routeType='patchcord') { let html=await readFile(join(root,"index.html"),"utf8"); if(!item) return html; const title=titleFor(item),description=descriptionFor(item),url=`https://www.fibersas.com${item.path}`,dataAttribute=routeType==='cable'?'data-cable-route':'data-patchcord-route'; html=html.replace(/<title>.*?<\/title>/s,`<title>${escapeAttr(title)}</title>`).replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${escapeAttr(description)}">`).replace(/<link rel="canonical" href="[^"]*">/,`<link rel="canonical" href="${url}">`).replace(/<meta property="og:title" content="[^"]*">/,`<meta property="og:title" content="${escapeAttr(title)}">`).replace(/<meta property="og:description" content="[^"]*">/,`<meta property="og:description" content="${escapeAttr(description)}">`).replace(/<meta property="og:url" content="[^"]*">/,`<meta property="og:url" content="${url}">`).replace("<body>",`<body ${dataAttribute}='${escapeAttr(JSON.stringify(item))}'>`); return html; }
 
 async function overview(daysValue) {
   if(!pool) return {configured:false,totals:{},trend:[],topLines:[],topReferences:[],topSources:[],recent:[]};
@@ -94,6 +97,8 @@ const server=createServer(async(req,res)=>{ try {
   if(url.pathname==="/api/admin/overview") { if(!adminSession(req)) return json(res,401,{error:"Unauthorized"}); return json(res,200,await overview(url.searchParams.get("days"))); }
   const item=parsePatchcordPath(url.pathname);
   if(url.pathname.startsWith("/patch-cords/")) { if(!item) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(item); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
+  const cableItem=parseCablePath(url.pathname);
+  if(url.pathname.startsWith("/cables-fibra/")) { if(!cableItem) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(cableItem,'cable'); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
   let requested=url.pathname==="/"?"/index.html":url.pathname==="/admin"||url.pathname==="/admin/"?"/admin.html":url.pathname;
   const safe=normalize(requested).replace(/^(\.\.(\/|\\|$))+/g,""); const file=join(root,safe); if(!file.startsWith(root)) return json(res,403,{error:"Forbidden"}); const info=await stat(file); if(!info.isFile()) throw Object.assign(new Error("Not found"),{code:"ENOENT"}); res.writeHead(200,{"content-type":mime[extname(file).toLowerCase()]||"application/octet-stream","cache-control":production&&!file.endsWith(".html")?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); res.end(await readFile(file));
 } catch(error) { console.error('Request failed',req.method,req.url,error); const notFound=error?.code==="ENOENT"; if(!res.headersSent) json(res,notFound?404:500,{error:notFound?"Not found":"Server error"}); else res.end(); }});

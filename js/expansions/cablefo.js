@@ -1,51 +1,117 @@
-// js/expansions/cablefo.js
+import { track } from '../analytics.js'
 
-export function renderCablefo(container) {
+const CABLES = [
+  { family:'SM', construction:'armada', fiber:'OS2', count:12, slug:'monomodo-armada-os2-12-hilos' },
+  ...['indoor-outdoor', 'armada'].flatMap(construction =>
+    ['OM3', 'OM4'].flatMap(fiber => [6, 12].map(count => ({ family:'MM', construction, fiber, count, slug:`multimodo-${construction}-${fiber.toLowerCase()}-${count}-hilos` })))
+  )
+]
+
+const LABELS = { SM:'Monomodo', MM:'Multimodo', armada:'Armada', 'indoor-outdoor':'Indoor / Outdoor' }
+
+export function renderCablefo(container, initial = {}) {
   container.innerHTML = `
     <div class="expansion-panel">
-      <img src="/img/fo/cablefo.webp" alt="Cable de fibra óptica">
-
+      <div class="pc-visual cablefo-visual">
+        <img src="/img/fo/cablefo.webp" class="pc-image" alt="Rollos de cable de fibra óptica">
+        <div class="cablefo-meter-badge">Venta por metros</div>
+      </div>
       <div class="expansion-content">
-
         <div class="expansion-header">
           <h2>Cable Fibra Óptica</h2>
-          <div class="expansion-back">← Volver</div>
+          <button class="expansion-back" type="button">← Volver</button>
         </div>
-
-        <p>
-          Soluciones de cableado óptico para backbone, distribución y acceso,
-          diseñadas para garantizar estabilidad, baja atenuación y alto desempeño
-          en redes de telecomunicaciones y proyectos corporativos.
-        </p>
-
-        <p>
-          Nuestra mayor rotación se concentra en cables multimodo y monomodo
-          para aplicaciones interiores y exteriores, adaptándose a diferentes
-          tipos de instalación.
-        </p>
-
-        <ul>
-          <li>Cable multimodo de 6 y 12 fibras para uso interior y exterior</li>
-          <li>Cable monomodo de 12 y 24 fibras armado para exteriores</li>
-          <li>Cables reforzados para instalaciones en ductos o canalizaciones</li>
-          <li>Cable ADSS para tendidos aéreos (bajo requerimiento)</li>
-          <li>Fibras especiales no metálicas, antiroedor y retardantes al fuego para túneles</li>
-        </ul>
-
-        <p>
-          Esta línea permite implementar enlaces robustos y confiables en entornos
-          exigentes, asegurando continuidad operativa y crecimiento de la red a futuro.
-        </p>
-
-        <a 
-          href="https://wa.me/573134991444?text=Hola,%20estoy%20interesado%20en%20cable%20de%20fibra%20óptica.%20¿Me%20puedes%20ayudar%20con%20una%20cotización?"
-          target="_blank" rel="noopener noreferrer"
-          class="btn-whatsapp"
-        >
-          Cotizar por WhatsApp
-        </a>
-
+        <p class="cablefo-intro">Configura la referencia disponible y descarga su ficha técnica estandarizada.</p>
+        <div class="pc-form">
+          <label for="cable-family">Familia</label>
+          <select id="cable-family"><option value="SM">Monomodo</option><option value="MM">Multimodo</option></select>
+          <label for="cable-construction">Construcción</label>
+          <select id="cable-construction"></select>
+          <label for="cable-fiber">Tipo de fibra</label>
+          <select id="cable-fiber"></select>
+          <label for="cable-count">Número de hilos</label>
+          <select id="cable-count"></select>
+          <label for="cable-meters">Cantidad requerida (metros)</label>
+          <input id="cable-meters" type="number" min="1" step="1" value="1" inputmode="numeric">
+        </div>
+        <div id="cable-result" class="pc-result" aria-live="polite"></div>
+        <div id="cable-info" class="pc-info"></div>
+        <div class="cablefo-actions">
+          <a id="cable-datasheet" class="btn-datasheet" target="_blank" rel="noopener noreferrer">Descargar ficha técnica</a>
+          <a id="cable-whatsapp" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
+        </div>
+        <button id="cable-copy-link" type="button" class="btn-disabled">Copiar enlace de esta referencia</button>
       </div>
-    </div>
-  `
+    </div>`
+
+  setTimeout(() => {
+    const family = container.querySelector('#cable-family')
+    const construction = container.querySelector('#cable-construction')
+    const fiber = container.querySelector('#cable-fiber')
+    const count = container.querySelector('#cable-count')
+    const meters = container.querySelector('#cable-meters')
+    const result = container.querySelector('#cable-result')
+    const info = container.querySelector('#cable-info')
+    const datasheet = container.querySelector('#cable-datasheet')
+    const whatsapp = container.querySelector('#cable-whatsapp')
+    const copyLink = container.querySelector('#cable-copy-link')
+    const unique = (items, key) => [...new Set(items.map(item => item[key]))]
+    const setOptions = (select, values, label = value => value) => {
+      const previous = select.value
+      select.innerHTML = values.map(value => `<option value="${value}">${label(value)}</option>`).join('')
+      if (values.map(String).includes(previous)) select.value = previous
+    }
+    const compatible = (filters = {}) => CABLES.filter(item => Object.entries(filters).every(([key, value]) => String(item[key]) === String(value)))
+    const loadConstruction = () => setOptions(construction, unique(compatible({family:family.value}), 'construction'), value => LABELS[value])
+    const loadFiber = () => setOptions(fiber, unique(compatible({family:family.value, construction:construction.value}), 'fiber'))
+    const loadCount = () => setOptions(count, unique(compatible({family:family.value, construction:construction.value, fiber:fiber.value}), 'count'), value => `${value} hilos`)
+    const selectedCable = () => compatible({family:family.value, construction:construction.value, fiber:fiber.value, count:count.value})[0]
+    const selectedPath = (item = selectedCable()) => item ? `/cables-fibra/${item.slug}/` : '/'
+    const reference = item => `Cable ${LABELS[item.family]} ${LABELS[item.construction]} ${item.fiber} ${item.count} hilos`
+
+    function update({trackChange = false} = {}) {
+      const item = selectedCable()
+      if (!item) return
+      const requestedMeters = Math.max(1, Math.floor(Number(meters.value) || 1))
+      meters.value = requestedMeters
+      const text = reference(item)
+      result.textContent = text
+      info.textContent = item.construction === 'armada'
+        ? 'Cable para exteriores con armadura de acero corrugado, protección contra roedores y alta resistencia mecánica.'
+        : 'Cable no metálico para uso interior y exterior, con miembros de fuerza de hilo de vidrio y cubierta PE o LSZH.'
+      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${item.slug}.pdf`
+      datasheet.dataset.reference = text
+      whatsapp.href = `https://wa.me/573134991444?text=${encodeURIComponent(`Hola, quiero cotizar:\n${text}\nCantidad: ${requestedMeters} metros`)}`
+      whatsapp.dataset.line = 'cablefo'
+      whatsapp.dataset.reference = `${text} - ${requestedMeters} m`
+      history.replaceState({}, '', selectedPath(item))
+      if (trackChange) track('selector_change', {line:'cablefo', reference:text, metadata:{meters:requestedMeters, configurationPath:selectedPath(item)}})
+    }
+
+    family.addEventListener('change', () => { loadConstruction(); loadFiber(); loadCount(); update({trackChange:true}) })
+    construction.addEventListener('change', () => { loadFiber(); loadCount(); update({trackChange:true}) })
+    fiber.addEventListener('change', () => { loadCount(); update({trackChange:true}) })
+    count.addEventListener('change', () => update({trackChange:true}))
+    meters.addEventListener('change', () => update({trackChange:true}))
+    datasheet.addEventListener('click', () => track('datasheet_download', {line:'cablefo', reference:result.textContent}))
+    copyLink.addEventListener('click', async () => {
+      const url = new URL(selectedPath(), location.origin).href
+      try {
+        await navigator.clipboard.writeText(url)
+        copyLink.textContent = '✓ Enlace copiado'
+        track('configuration_url_copied', {line:'cablefo', reference:result.textContent, metadata:{configurationPath:selectedPath()}})
+        setTimeout(() => { copyLink.textContent = 'Copiar enlace de esta referencia' }, 1800)
+      } catch { window.prompt('Copia este enlace:', url) }
+    })
+
+    if (initial.family) family.value = initial.family
+    loadConstruction()
+    if (initial.construction) construction.value = initial.construction
+    loadFiber()
+    if (initial.fiber) fiber.value = initial.fiber
+    loadCount()
+    if (initial.count) count.value = String(initial.count)
+    if (initial.meters) meters.value = String(initial.meters)
+    update()
+  }, 0)
 }
