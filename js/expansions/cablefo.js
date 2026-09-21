@@ -92,6 +92,7 @@ export function renderCablefo(container, initial = {}) {
     construction.addEventListener('change', () => { loadFiber(); loadCount(); update({trackChange:true}) })
     fiber.addEventListener('change', () => { loadCount(); update({trackChange:true}) })
     count.addEventListener('change', () => update({trackChange:true}))
+    meters.addEventListener('input', () => update())
     meters.addEventListener('change', () => update({trackChange:true}))
     datasheet.addEventListener('click', () => track('datasheet_download', {line:'cablefo', reference:result.textContent}))
     copyLink.addEventListener('click', async () => {
