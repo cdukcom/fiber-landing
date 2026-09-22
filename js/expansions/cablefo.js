@@ -84,9 +84,11 @@ export function renderCablefo(container, initial = {}) {
       const image = CABLE_IMAGES[item.construction]
       if (!image || cableImage.getAttribute('src') === image.src) return
       cableImage.classList.add('is-changing')
+      const revealImage = () => cableImage.classList.remove('is-changing')
+      cableImage.addEventListener('load', revealImage, {once:true})
       cableImage.src = image.src
       cableImage.alt = image.alt
-      cableImage.addEventListener('load', () => cableImage.classList.remove('is-changing'), {once:true})
+      if (cableImage.complete) requestAnimationFrame(revealImage)
     }
 
     function update({trackChange = false} = {}) {
