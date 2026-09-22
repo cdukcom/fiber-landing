@@ -79,6 +79,11 @@ export function renderCablefo(container, initial = {}) {
     const selectedCable = () => compatible({family:family.value, construction:construction.value, fiber:fiber.value, count:count.value})[0]
     const selectedPath = (item = selectedCable()) => item ? `/cables-fibra/${item.slug}/` : '/'
     const reference = item => `Cable ${LABELS[item.family]} ${LABELS[item.construction]} ${item.fiber} ${item.count} hilos`
+    const datasheetFor = item => {
+      if (item.family === 'SM') return 'cable-armado-monomodo-os2-12-hilos.pdf'
+      if (item.construction === 'armada') return 'cable-armado-multimodo-om3-om4-6-12-hilos.pdf'
+      return 'cable-indoor-outdoor-multimodo-om3-om4-6-12-hilos.pdf'
+    }
 
     function updateImage(item) {
       const image = CABLE_IMAGES[item.construction]
@@ -100,9 +105,9 @@ export function renderCablefo(container, initial = {}) {
       updateImage(item)
       result.textContent = text
       info.textContent = item.construction === 'armada'
-        ? 'Cable para exteriores con armadura de acero corrugado, protección contra roedores y alta resistencia mecánica.'
-        : 'Cable no metálico para uso interior y exterior, con miembros de fuerza de hilo de vidrio y cubierta PE o LSZH.'
-      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${item.slug}.pdf`
+        ? 'Cable para exteriores con cubierta PVC, armadura de acero corrugado, protección contra roedores y alta resistencia mecánica.'
+        : 'Cable no metálico para uso interior y exterior, con miembros de fuerza de hilo de vidrio y cubierta LSZH.'
+      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}`
       datasheet.dataset.reference = text
       whatsapp.href = `https://wa.me/573134991444?text=${encodeURIComponent(`Hola, quiero cotizar:\n${text}\nCantidad: ${requestedMeters} metros`)}`
       whatsapp.dataset.line = 'cablefo'
