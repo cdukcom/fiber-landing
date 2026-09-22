@@ -505,8 +505,10 @@ a.card { color: inherit; text-decoration: none; }
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.cablefo-visual { position: sticky; top: 24px; }
-.cablefo-meter-badge { width: max-content; margin: 16px auto 0; padding: 7px 13px; border-radius: 999px; background: #e8f0ff; color: var(--accent); font-size: 13px; font-weight: 800; }
+.cablefo-visual { position: sticky; top: 24px; flex-direction: column; align-items: center; gap: 14px; }
+.cablefo-image { min-height: 260px; padding: 14px; border-radius: 16px; background: linear-gradient(145deg, #f8fafc, #eef4ff); transition: opacity .18s ease, transform .18s ease; }
+.cablefo-image.is-changing { opacity: .35; transform: scale(.985); }
+.cablefo-meter-badge { width: max-content; max-width: 100%; margin: 0; padding: 7px 14px; border-radius: 999px; background: #e8f0ff; color: var(--accent); font-size: 13px; line-height: 1.2; font-weight: 800; text-align: center; white-space: nowrap; }
 .cablefo-intro { margin-top: -8px; }
 .pc-form input { width: 100%; min-height: 38px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px; background: #fff; color: var(--text); font: inherit; }
 .cablefo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }

@@ -8,12 +8,22 @@ const CABLES = [
 ]
 
 const LABELS = { SM:'Monomodo', MM:'Multimodo', armada:'Armada', 'indoor-outdoor':'Indoor / Outdoor' }
+const CABLE_IMAGES = {
+  armada: {
+    src:'/img/cable-types/armada.webp',
+    alt:'Corte del cable de fibra óptica armado GYXTW'
+  },
+  'indoor-outdoor': {
+    src:'/img/cable-types/indoor-outdoor.webp',
+    alt:'Corte del cable de fibra óptica indoor y outdoor no metálico'
+  }
+}
 
 export function renderCablefo(container, initial = {}) {
   container.innerHTML = `
     <div class="expansion-panel">
       <div class="pc-visual cablefo-visual">
-        <img src="/img/fo/cablefo.webp" class="pc-image" alt="Rollos de cable de fibra óptica">
+        <img id="cable-image" src="/img/cable-types/armada.webp" class="pc-image cablefo-image" alt="Corte del cable de fibra óptica armado GYXTW">
         <div class="cablefo-meter-badge">Venta por metros</div>
       </div>
       <div class="expansion-content">
@@ -50,6 +60,7 @@ export function renderCablefo(container, initial = {}) {
     const fiber = container.querySelector('#cable-fiber')
     const count = container.querySelector('#cable-count')
     const meters = container.querySelector('#cable-meters')
+    const cableImage = container.querySelector('#cable-image')
     const result = container.querySelector('#cable-result')
     const info = container.querySelector('#cable-info')
     const datasheet = container.querySelector('#cable-datasheet')
@@ -69,12 +80,22 @@ export function renderCablefo(container, initial = {}) {
     const selectedPath = (item = selectedCable()) => item ? `/cables-fibra/${item.slug}/` : '/'
     const reference = item => `Cable ${LABELS[item.family]} ${LABELS[item.construction]} ${item.fiber} ${item.count} hilos`
 
+    function updateImage(item) {
+      const image = CABLE_IMAGES[item.construction]
+      if (!image || cableImage.getAttribute('src') === image.src) return
+      cableImage.classList.add('is-changing')
+      cableImage.src = image.src
+      cableImage.alt = image.alt
+      cableImage.addEventListener('load', () => cableImage.classList.remove('is-changing'), {once:true})
+    }
+
     function update({trackChange = false} = {}) {
       const item = selectedCable()
       if (!item) return
       const requestedMeters = Math.max(1, Math.floor(Number(meters.value) || 1))
       meters.value = requestedMeters
       const text = reference(item)
+      updateImage(item)
       result.textContent = text
       info.textContent = item.construction === 'armada'
         ? 'Cable para exteriores con armadura de acero corrugado, protección contra roedores y alta resistencia mecánica.'
