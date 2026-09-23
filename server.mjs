@@ -47,6 +47,7 @@ function adminSession(req) { try { const [payload,supplied]=String(cookies(req).
 function validPassword(value) { const salt="fiber-admin"; return timingSafeEqual(scryptSync(String(value),salt,64),scryptSync(adminPassword,salt,64)); }
 function sameOrigin(req) { const origin=req.headers.origin; return !origin||origin===`${req.headers["x-forwarded-proto"]||"http"}://${req.headers.host}`; }
 function clean(value,max=200) { return String(value||"").trim().slice(0,max); }
+function sourceGroup(value) { const source=String(value||"direct").toLowerCase(); if(!source||source==="direct"||source==="(direct)")return "Directo"; if(["google","bing","yahoo","duckduckgo"].some(x=>source.includes(x)))return "Buscadores"; if(["facebook","instagram","linkedin","youtube","tiktok","x.com","twitter"].some(x=>source.includes(x)))return "Redes sociales"; return "Referidos / campañas"; }
 function titleFor(item) { if(!item) return "Fiber Electronics | Fibra óptica, SFP y conectividad"; if(item.slug) return `Cable ${item.family==='SM'?'Monomodo':'Multimodo'} ${item.fiber} ${item.count} hilos ${item.construction==='armada'?'Armado':'Indoor/Outdoor'} | Fiber Electronics`; if(!item.mode) return `Patch Cords Multimodo ${item.subtype} | Fiber Electronics`; return `Patch Cord ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} m | Fiber Electronics`; }
 function descriptionFor(item) { if(item?.slug) return `Consulta la ficha técnica del cable ${item.family==='SM'?'monomodo':'multimodo'} ${item.fiber} de ${item.count} hilos, ${item.construction==='armada'?'armado para exteriores':'para uso interior y exterior'}, disponible por metros.`; if(!item.mode) return `Encuentra patch cords multimodo ${item.subtype} por conectores y longitud. Selecciona la referencia que necesitas y solicita atención por WhatsApp.`; return `Consulta el patch cord multimodo ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} metros y solicita cotización y coordinación de envío por WhatsApp.`; }
 function escapeAttr(value) { return String(value).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("'","&#39;").replaceAll("<","&lt;"); }
@@ -57,24 +58,27 @@ function sitemap() {
 async function renderPage(item, routeType='patchcord') { let html=await readFile(join(root,"index.html"),"utf8"); if(!item) return html; const title=titleFor(item),description=descriptionFor(item),url=`https://www.fibersas.com${item.path}`,dataAttribute=routeType==='cable'?'data-cable-route':'data-patchcord-route'; html=html.replace(/<title>.*?<\/title>/s,`<title>${escapeAttr(title)}</title>`).replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${escapeAttr(description)}">`).replace(/<link rel="canonical" href="[^"]*">/,`<link rel="canonical" href="${url}">`).replace(/<meta property="og:title" content="[^"]*">/,`<meta property="og:title" content="${escapeAttr(title)}">`).replace(/<meta property="og:description" content="[^"]*">/,`<meta property="og:description" content="${escapeAttr(description)}">`).replace(/<meta property="og:url" content="[^"]*">/,`<meta property="og:url" content="${url}">`).replace("<body>",`<body ${dataAttribute}='${escapeAttr(JSON.stringify(item))}'>`); return html; }
 
 async function overview(daysValue) {
-  if(!pool) return {configured:false,totals:{},trend:[],topLines:[],topReferences:[],topSources:[],recent:[]};
+  if(!pool) return {configured:false,totals:{},trend:[],topLines:[],topReferences:[],topSources:[],topLandings:[],recent:[],common:{summary:{views:0,consultations:0,downloads:0,contacts:0},trend:[],topPages:[],topItems:[],topDatasheets:[],sources:[],recent:[]}};
   const days=Math.min(Math.max(Number(daysValue)||30,1),365),cutoff=Date.now()-days*86400000;
   const result=await pool.query(`SELECT event_type,path,line,reference,session_id,source,metadata,created_at FROM fiber_events ORDER BY created_at DESC LIMIT 100000`);
-  const totals={},daily=new Map(),lines=new Map(),references=new Map(),sources=new Map(),landings=new Map(),seenSessions=new Set(),recent=[];
+  const totals={},daily=new Map(),lines=new Map(),references=new Map(),sources=new Map(),pages=new Map(),datasheets=new Map(),landings=new Map(),seenSessions=new Set(),recent=[];
   const count=(map,key)=>{if(key)map.set(key,(map.get(key)||0)+1)};
   for(const row of result.rows){
     const date=new Date(row.created_at); if(!Number.isFinite(date.getTime())||date.getTime()<cutoff)continue;
     totals[row.event_type]=(totals[row.event_type]||0)+1;
-    if(row.event_type==='page_view'&&row.session_id&&!seenSessions.has(row.session_id)){seenSessions.add(row.session_id);if(parsePatchcordPath(row.path))count(landings,row.path)}
+    if(row.event_type==='page_view'&&row.session_id&&!seenSessions.has(row.session_id)){seenSessions.add(row.session_id);if(parsePatchcordPath(row.path)||parseCablePath(row.path))count(landings,row.path)}
     if(recent.length<50)recent.push({...row,created_at:date.toISOString()});
-    const day=date.toISOString().slice(0,10),item=daily.get(day)||{day,views:0,consultations:0,whatsapp:0};
-    if(row.event_type==='page_view')item.views++;
+    const day=date.toISOString().slice(0,10),item=daily.get(day)||{day,period:day,views:0,consultations:0,downloads:0,whatsapp:0};
+    if(row.event_type==='page_view'){item.views++;count(pages,row.path)}
     if(row.event_type==='line_view'||row.event_type==='reference_view')item.consultations++;
+    if(row.event_type==='datasheet_download'){item.downloads++;count(datasheets,row.reference||row.metadata?.title||row.path)}
     if(row.event_type==='whatsapp_click')item.whatsapp++;
-    daily.set(day,item); count(lines,row.line); count(references,row.reference); count(sources,row.source||'direct');
+    daily.set(day,item); count(lines,row.line); count(references,row.reference); if(row.event_type==='line_view'||row.event_type==='reference_view')count(sources,sourceGroup(row.source));
   }
   const ranked=map=>[...map].map(([label,count])=>({label,count})).sort((a,b)=>b.count-a.count).slice(0,10);
-  return {configured:true,days,totals,trend:[...daily.values()].sort((a,b)=>a.day.localeCompare(b.day)),topLines:ranked(lines),topReferences:ranked(references),topSources:ranked(sources),topLandings:ranked(landings).slice(0,5),recent};
+  const trend=[...daily.values()].sort((a,b)=>a.day.localeCompare(b.day));
+  return {configured:true,days,totals,trend,topLines:ranked(lines),topReferences:ranked(references),topSources:ranked(sources),topLandings:ranked(landings).slice(0,5),recent,
+    common:{summary:{views:totals.page_view||0,consultations:(totals.line_view||0)+(totals.reference_view||0),downloads:totals.datasheet_download||0,contacts:(totals.whatsapp_click||0)+(totals.email_click||0)},trend,topPages:ranked(pages),topItems:ranked(references),topDatasheets:ranked(datasheets),sources:ranked(sources),recent:recent.map(row=>({created_at:row.created_at,event_type:row.event_type,item:row.reference||row.line||'—',path:row.path||'—',source:sourceGroup(row.source)}))}};
 }
 
 async function popularConfigurations(){
