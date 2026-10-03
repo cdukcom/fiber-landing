@@ -86,7 +86,7 @@ function validate(state){
   return warnings
 }
 function buildDesign(){
-  const state=collect(),cableMeters=Math.ceil(state.distance*(1+state.reserve/100)),used=state.linkMode==='bidi'?1:2,cable=cableCatalog.find(item=>item.family===state.cableFamily&&item.fiber===state.cableFiber&&item.construction===state.construction&&item.strands===state.strands)
+  const state=collect(),cableMeters=Math.ceil(state.distance*(100+state.reserve)/100),used=state.linkMode==='bidi'?1:2,cable=cableCatalog.find(item=>item.family===state.cableFamily&&item.fiber===state.cableFiber&&item.construction===state.construction&&item.strands===state.strands)
   const rows=[...endpointRows(state,'A'),{item:'Cable principal',description:`${cable?.reference||'Cable Fiber Electronics'} (${state.reserve}% de reserva incluida)`,qty:cableMeters,unit:'m'},{item:'Fusiones',description:`Fusiones para ${used} ${used===1?'fibra':'fibras'} en cada extremo`,qty:used*2,unit:'servicio'},...endpointRows(state,'B')]
   return{state,rows,warnings:validate(state),cableMeters,reference:`PTP-${state.speed}-${state.fiberType}-${state.linkMode.toUpperCase()}-${state.distance}M`}
 }
