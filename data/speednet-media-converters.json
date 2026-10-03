@@ -14,9 +14,19 @@
       "fiberMode": "MM",
       "fiberCount": 2,
       "fiberInterface": "fixed-optical",
-      "connector": null,
-      "reach": null,
-      "datasheet": "/api/datasheets/SN-MC-FE-MM-2F.pdf"
+      "connector": "SC duplex",
+      "reach": {
+        "value": 2.0,
+        "unit": "km"
+      },
+      "datasheet": "/api/datasheets/SN-MC-FE-MM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 2.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-FE-MM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-FE-SM-2F",
@@ -29,9 +39,36 @@
       "fiberMode": "SM",
       "fiberCount": 2,
       "fiberInterface": "fixed-optical",
-      "connector": null,
+      "connector": "SC duplex",
       "reach": null,
-      "datasheet": "/api/datasheets/SN-MC-FE-SM-2F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-FE-SM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 25.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 60.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        },
+        {
+          "value": 100.0,
+          "unit": "km"
+        },
+        {
+          "value": 120.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-FE-SM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-FE-SM-1F",
@@ -44,10 +81,37 @@
       "fiberMode": "SM",
       "fiberCount": 1,
       "fiberInterface": "fixed-optical-bidi",
-      "connector": null,
+      "connector": "SC simplex",
       "reach": null,
       "dataNote": "Wavelength pair pending datasheet verification.",
-      "datasheet": "/api/datasheets/SN-MC-FE-SM-1F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-FE-SM-1F.pdf",
+      "reachOptions": [
+        {
+          "value": 25.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 60.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        },
+        {
+          "value": 100.0,
+          "unit": "km"
+        },
+        {
+          "value": 120.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-FE-SM-1F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-GE-MM-2F",
@@ -61,9 +125,20 @@
       "fiberMode": "MM",
       "fiberCount": 2,
       "fiberInterface": "fixed-optical",
-      "connector": null,
+      "connector": "SC duplex",
       "reach": null,
-      "datasheet": "/api/datasheets/SN-MC-GE-MM-2F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-GE-MM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 550,
+          "unit": "m"
+        },
+        {
+          "value": 2.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-GE-MM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-GE-SM-2F",
@@ -77,9 +152,28 @@
       "fiberMode": "SM",
       "fiberCount": 2,
       "fiberInterface": "fixed-optical",
-      "connector": null,
+      "connector": "SC duplex",
       "reach": null,
-      "datasheet": "/api/datasheets/SN-MC-GE-SM-2F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-GE-SM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 20.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 60.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-GE-SM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-GE-SM-1F",
@@ -93,10 +187,29 @@
       "fiberMode": "SM",
       "fiberCount": 1,
       "fiberInterface": "fixed-optical-bidi",
-      "connector": null,
+      "connector": "SC simplex",
       "reach": null,
       "dataNote": "Wavelength pair pending datasheet verification.",
-      "datasheet": "/api/datasheets/SN-MC-GE-SM-1F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-GE-SM-1F.pdf",
+      "reachOptions": [
+        {
+          "value": 20.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 60.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-GE-SM-1F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-1G-10G-MM-2F",
@@ -109,10 +222,40 @@
       "fiberMode": "MM",
       "fiberCount": 2,
       "fiberInterface": "pending-definition",
-      "connector": null,
+      "connector": "LC duplex",
       "reach": null,
       "dataNote": "Port roles and rate conversion behavior require confirmation.",
-      "datasheet": "/api/datasheets/SN-MC-1G-10G-MM-2F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-MM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 550,
+          "unit": "m",
+          "ratesMbps": [
+            1000
+          ]
+        },
+        {
+          "value": 300,
+          "unit": "m",
+          "ratesMbps": [
+            10000
+          ],
+          "fiberTypes": [
+            "OM3"
+          ]
+        },
+        {
+          "value": 400,
+          "unit": "m",
+          "ratesMbps": [
+            10000
+          ],
+          "fiberTypes": [
+            "OM4"
+          ]
+        }
+      ],
+      "reachSource": "Speednet SN-MC-1G-10G-MM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-1G-10G-SM-2F",
@@ -125,10 +268,29 @@
       "fiberMode": "SM",
       "fiberCount": 2,
       "fiberInterface": "pending-definition",
-      "connector": null,
+      "connector": "LC duplex",
       "reach": null,
       "dataNote": "Port roles and rate conversion behavior require confirmation.",
-      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-2F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-2F.pdf",
+      "reachOptions": [
+        {
+          "value": 10.0,
+          "unit": "km"
+        },
+        {
+          "value": 20.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-1G-10G-SM-2F datasheet, nominal reach variants reviewed 2026-10-03"
     },
     {
       "id": "SN-MC-1G-10G-SM-1F",
@@ -141,10 +303,29 @@
       "fiberMode": "SM",
       "fiberCount": 1,
       "fiberInterface": "pending-definition-bidi",
-      "connector": null,
+      "connector": "LC simplex",
       "reach": null,
       "dataNote": "Port roles, rate conversion behavior and wavelength pair require confirmation.",
-      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-1F.pdf"
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-1F.pdf",
+      "reachOptions": [
+        {
+          "value": 10.0,
+          "unit": "km"
+        },
+        {
+          "value": 20.0,
+          "unit": "km"
+        },
+        {
+          "value": 40.0,
+          "unit": "km"
+        },
+        {
+          "value": 80.0,
+          "unit": "km"
+        }
+      ],
+      "reachSource": "Speednet SN-MC-1G-10G-SM-1F datasheet, nominal reach variants reviewed 2026-10-03"
     }
   ]
 }

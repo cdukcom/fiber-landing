@@ -800,3 +800,6 @@ a.card { color: inherit; text-decoration: none; }
 
 @media(max-width:980px){.bomaker-hero-grid{grid-template-columns:1fr}.bom-fields,.bom-general .bom-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.bom-diagram{grid-template-columns:repeat(7,minmax(130px,1fr))}}
 @media(max-width:700px){.bomaker-nav>a:not(.primary){display:none}.bomaker-hero{padding:45px 0}.ptp-mini-map{padding:14px;grid-template-columns:1fr 18px 1fr}.ptp-mini-map strong{grid-column:1/-1}.ptp-mini-map div:nth-of-type(3),.ptp-mini-map div:nth-of-type(4),.ptp-mini-map i:nth-of-type(2){display:none}.bom-endpoints{grid-template-columns:1fr}.bom-fields,.bom-general .bom-fields,.bom-endpoints .bom-fields{grid-template-columns:1fr}.builder-heading{align-items:flex-start;flex-direction:column}.bomaker-cta{grid-template-columns:1fr}.bomaker-cta .btn{width:100%;text-align:center}.bom-table [contenteditable]{min-width:240px}}
+
+.endpoint-reach[hidden] { display:none; }
+.endpoint-reach small { color:var(--muted); font-size:12px; font-weight:400; }

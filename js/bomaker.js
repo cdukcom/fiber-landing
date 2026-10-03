@@ -1,4 +1,5 @@
 import { track } from './analytics.js'
+import { converterReachOptions, formatReach, converterDistanceWarning } from './bomaker-reach.js'
 
 const form=document.querySelector('#bom-form'),alerts=document.querySelector('#bom-alerts'),rowsTarget=document.querySelector('#bom-rows'),diagram=document.querySelector('#bom-diagram'),status=document.querySelector('#bom-status'),whatsapp=document.querySelector('#bom-whatsapp'),pdfButton=document.querySelector('#bom-pdf'),copyButton=document.querySelector('#bom-copy')
 const labels={switch:'Switch existente',converter:'Conversor Speednet',existing:'Equipo existente',box6:'Caja óptica Fiber Electronics de 6 hilos',box12:'Caja óptica Fiber Electronics de 12 hilos',odf24:'ODF Fiber Electronics de 24 hilos',armada:'Armado para exterior','indoor-outdoor':'Indoor / Outdoor'}
@@ -34,6 +35,10 @@ function syncEndpointProducts(preferred={}){
     }
     setOptions(select,products,preferred[end]||select.value,item=>`${item.id} — ${item.name}`)
     select.disabled=active==='existing'||products.length===0;wrap.hidden=active==='existing'
+    const reachSelect=form.elements[`nominalReach${end}`],reachWrap=reachSelect.closest('.endpoint-reach')
+    const reaches=active==='converter'?converterReachOptions(productById(select.value),state):[]
+    setOptions(reachSelect,reaches,reachSelect.value,item=>formatReach(item.id))
+    reachSelect.disabled=reaches.length===0;reachWrap.hidden=active!=='converter'||reaches.length===0
   })
 }
 function syncLinkFiber(){
@@ -50,12 +55,13 @@ function syncCable(){
   const byConstruction=byFiber.filter(item=>item.construction===value('construction'))
   setOptions(form.elements.strands,[...new Set(byConstruction.map(item=>item.strands))],previous.strands,item=>`${item} hilos`)
 }
-function collect(){return{...basicState(),reserve:Math.min(50,Math.floor(number('reserve'))),cableFamily:value('cableFamily'),cableFiber:value('cableFiber'),construction:value('construction'),strands:Number(value('strands')),productA:value('productA'),productB:value('productB'),terminationA:value('terminationA'),terminationConnectorA:value('terminationConnectorA'),patchLengthA:Math.max(1,Math.floor(number('patchLengthA'))),terminationB:value('terminationB'),terminationConnectorB:value('terminationConnectorB'),patchLengthB:Math.max(1,Math.floor(number('patchLengthB')))}}
-function productLabel(state,end){const active=state[`active${end}`],product=productById(state[`product${end}`]);if(active==='existing')return'Óptica existente / no incluida';return product?`${product.id} — ${product.name}`:'No hay referencia compatible disponible'}
+function collect(){return{...basicState(),reserve:Math.min(50,Math.floor(number('reserve'))),cableFamily:value('cableFamily'),cableFiber:value('cableFiber'),construction:value('construction'),strands:Number(value('strands')),productA:value('productA'),productB:value('productB'),nominalReachA:number('nominalReachA'),nominalReachB:number('nominalReachB'),terminationA:value('terminationA'),terminationConnectorA:value('terminationConnectorA'),patchLengthA:Math.max(1,Math.floor(number('patchLengthA'))),terminationB:value('terminationB'),terminationConnectorB:value('terminationConnectorB'),patchLengthB:Math.max(1,Math.floor(number('patchLengthB')))}}
+function selectedProductLabel(state,end){const product=productById(state[`product${end}`]);return product?`${product.id} — ${product.name}${state[`active${end}`]==='converter'&&state[`nominalReach${end}`]?` · alcance nominal ${formatReach(state[`nominalReach${end}`])}`:''}`:'No hay referencia compatible disponible'}
+function productLabel(state,end){const active=state[`active${end}`],product=productById(state[`product${end}`]);if(active==='existing')return'Óptica existente / no incluida';return selectedProductLabel(state,end)}
 function opticalConnector(state,end){const product=productById(state[`product${end}`]);if(product?.connector)return product.connector.split(' ')[0];return state[`active${end}`]==='converter'?'SC':'LC'}
 function endpointRows(state,end){
   const active=state[`active${end}`],product=productById(state[`product${end}`]),termination=state[`termination${end}`],terminationConnector=state[`terminationConnector${end}`],patchLength=state[`patchLength${end}`],used=state.linkMode==='bidi'?1:2,sourceConnector=opticalConnector(state,end),rows=[]
-  if(active!=='existing'&&product)rows.push({item:`Producto activo ${end}`,description:`${product.id} — ${product.name}`,qty:1,unit:'unidad'})
+  if(active!=='existing'&&product)rows.push({item:`Producto activo ${end}`,description:selectedProductLabel(state,end),qty:1,unit:'unidad'})
   rows.push({item:`Patch cord ${end}`,description:`Patch Cord ${state.fiberType} ${state.linkMode==='bidi'?'Simplex':'Duplex'} ${sourceConnector}-${terminationConnector} ${patchLength}m`,qty:1,unit:'unidad'})
   if(termination!=='existing'){
     rows.push({item:`Terminación ${end}`,description:`${labels[termination]} equipada para ${terminationConnector}`,qty:1,unit:'unidad'})
@@ -71,8 +77,11 @@ function validate(state){
   if(state.activeA!=='existing'&&!a)warnings.push('No existe una referencia del catálogo compatible para el extremo A.')
   if(state.activeB!=='existing'&&!b)warnings.push('No existe una referencia del catálogo compatible para el extremo B.')
   if(state.linkMode==='bidi'&&a?.pairId&&b?.id!==a.pairId)warnings.push(`El extremo B recomendado para ${a.id} es su par complementario ${a.pairId}.`)
-  if((state.activeA==='converter'||state.activeB==='converter')&&(!a?.reach||!b?.reach))warnings.push('El catálogo de conversores no publica alcance ni presupuesto óptico por variante; valide la distancia antes de cotizar.')
-  if(state.linkMode==='bidi'&&(state.activeA==='converter'||state.activeB==='converter'))warnings.push('En BiDi, confirme que las longitudes de onda Tx/Rx de ambos extremos sean complementarias.')
+  for(const end of ['A','B']){
+    if(state[`active${end}`]!=='converter')continue
+    const warning=converterDistanceWarning({product:productById(state[`product${end}`]),nominalReach:state[`nominalReach${end}`],distance:state.distance,end})
+    if(warning)warnings.push(warning)
+  }
   if(state.linkMode==='bidi'&&state.fiberFamily==='MM')warnings.push('El catálogo Speednet no ofrece BiDi multimodo para esta combinación.')
   return warnings
 }
@@ -87,8 +96,8 @@ function render(){
   document.querySelector('#summary-A').innerHTML=`<b>Referencia seleccionada</b><span>${escapeHtml(productLabel(state,'A'))}</span>`;document.querySelector('#summary-B').innerHTML=`<b>Referencia seleccionada</b><span>${escapeHtml(productLabel(state,'B'))}</span>`
   diagram.innerHTML=`${node('A',labels[state.activeA],productLabel(state,'A'))}<i></i>${node('◫',labels[state.terminationA],`${state.terminationConnectorA} · ${state.patchLengthA} m`)}<div class="diagram-cable"><b>${escapeHtml(`${state.cableFiber} · ${state.strands} hilos`)}</b><span>${design.cableMeters} m con reserva</span></div>${node('◫',labels[state.terminationB],`${state.terminationConnectorB} · ${state.patchLengthB} m`)}<i></i>${node('B',labels[state.activeB],productLabel(state,'B'))}`
   rowsTarget.innerHTML=design.rows.map((row,index)=>`<tr><td>${index+1}</td><td><span contenteditable="true" spellcheck="false">${escapeHtml(row.description)}</span></td><td><input class="bom-qty" type="number" min="0" step="1" value="${row.qty}" aria-label="Cantidad de ${escapeHtml(row.item)}"></td><td>${escapeHtml(row.unit)}</td></tr>`).join('')
-  alerts.innerHTML=design.warnings.length?design.warnings.map(message=>`<p><b>Revisar:</b> ${escapeHtml(message)}</p>`).join(''):'<p class="is-ok"><b>Compatible:</b> todas las referencias pertenecen al catálogo Fiber Electronics / Speednet.</p>'
-  status.textContent=design.warnings.length?`${design.warnings.length} aviso${design.warnings.length===1?'':'s'}`:'Referencias compatibles';status.classList.toggle('has-warnings',Boolean(design.warnings.length));whatsapp.href=`https://wa.me/573134991444?text=${encodeURIComponent(summaryText())}`
+  alerts.innerHTML=design.warnings.length?design.warnings.map(message=>`<p><b>Revisar:</b> ${escapeHtml(message)}</p>`).join(''):'<p class="is-ok"><b>Lista de materiales preparada.</b> Referencias del catálogo Fiber Electronics / Speednet.</p>'
+  status.textContent=design.warnings.length?`${design.warnings.length} aviso${design.warnings.length===1?'':'s'}`:'Lista de materiales preparada';status.classList.toggle('has-warnings',Boolean(design.warnings.length));whatsapp.href=`https://wa.me/573134991444?text=${encodeURIComponent(summaryText())}`
 }
 function currentRows(){return[...rowsTarget.querySelectorAll('tr')].map((row,index)=>({item:String(index+1),description:row.querySelector('[contenteditable]').textContent.trim(),qty:Number(row.querySelector('input').value)||0,unit:row.cells[3].textContent.trim()}))}
 function consolidatedRows(){const grouped=new Map();for(const row of currentRows()){const key=`${row.description.toLocaleLowerCase('es')}\u0000${row.unit.toLocaleLowerCase('es')}`,existing=grouped.get(key);if(existing)existing.qty+=row.qty;else grouped.set(key,{...row})}return[...grouped.values()]}
@@ -101,7 +110,7 @@ form.addEventListener('change',event=>{
     if(name==='fiberType'&&inheritedCable){form.elements.cableFiber.value=value('fiberType');syncCable()}
     syncEndpointProducts(previous)
   }
-  if(name==='productA'&&value('linkMode')==='bidi')syncEndpointProducts({A:value('productA')})
+  if(name==='productA'||name==='productB')syncEndpointProducts({A:value('productA'),B:value('productB')})
   if(name==='cableFamily'||name==='cableFiber'||name==='construction'){inheritedCable=false;syncCable()}
   if(name==='strands'){const n=Number(value('strands')),suggested=n<=6?'box6':n<=12?'box12':'odf24';form.elements.terminationA.value=suggested;form.elements.terminationB.value=suggested}
   render();track('selector_change',{line:'bomaker',reference:lastDesign.reference})

@@ -34,6 +34,7 @@
           <fieldset class="bom-card endpoint-card" data-end="A"><legend>2. Extremo A</legend><div class="bom-fields">
             <label>Arquitectura del extremo<select name="activeA"><option value="converter">Conversor Speednet</option><option value="switch" selected>Switch existente + módulo Speednet</option><option value="existing">Equipo existente / no incluir óptica</option></select></label>
             <label class="endpoint-product">Producto Fiber Electronics<select name="productA"></select></label>
+            <label class="endpoint-reach" hidden>Alcance nominal del producto<select name="nominalReachA"></select><small>Según la variante óptica seleccionada.</small></label>
             <label>Terminación<select name="terminationA"><option value="box6">Caja óptica 6 hilos</option><option value="box12" selected>Caja óptica 12 hilos</option><option value="odf24">ODF 24 hilos</option><option value="existing">Existente / no incluir</option></select></label>
             <label>Conector de terminación<select name="terminationConnectorA"><option value="LC" selected>LC</option><option value="SC">SC</option><option value="SC/APC">SC/APC</option></select></label>
             <label>Patch cord (m)<input name="patchLengthA" type="number" min="1" max="100" value="3"></label>
@@ -41,6 +42,7 @@
           <fieldset class="bom-card endpoint-card" data-end="B"><legend>3. Extremo B</legend><div class="bom-fields">
             <label>Arquitectura del extremo<select name="activeB"><option value="converter">Conversor Speednet</option><option value="switch" selected>Switch existente + módulo Speednet</option><option value="existing">Equipo existente / no incluir óptica</option></select></label>
             <label class="endpoint-product">Producto Fiber Electronics<select name="productB"></select></label>
+            <label class="endpoint-reach" hidden>Alcance nominal del producto<select name="nominalReachB"></select><small>Según la variante óptica seleccionada.</small></label>
             <label>Terminación<select name="terminationB"><option value="box6">Caja óptica 6 hilos</option><option value="box12" selected>Caja óptica 12 hilos</option><option value="odf24">ODF 24 hilos</option><option value="existing">Existente / no incluir</option></select></label>
             <label>Conector de terminación<select name="terminationConnectorB"><option value="LC" selected>LC</option><option value="SC">SC</option><option value="SC/APC">SC/APC</option></select></label>
             <label>Patch cord (m)<input name="patchLengthB" type="number" min="1" max="100" value="3"></label>
