@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "source": "Initial commercial catalog supplied by Fiber Electronics",
+  "sourceStatus": "approved-datasheet-catalog",
+  "items": [
+    {
+      "id": "SN-MC-FE-MM-2F",
+      "name": "10/100 Multimode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100
+      ],
+      "fiberMode": "MM",
+      "fiberCount": 2,
+      "fiberInterface": "fixed-optical",
+      "connector": null,
+      "reach": null,
+      "datasheet": "/api/datasheets/SN-MC-FE-MM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-FE-SM-2F",
+      "name": "10/100 Singlemode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 2,
+      "fiberInterface": "fixed-optical",
+      "connector": null,
+      "reach": null,
+      "datasheet": "/api/datasheets/SN-MC-FE-SM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-FE-SM-1F",
+      "name": "10/100 Singlemode Media Converter, 1 fiber",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 1,
+      "fiberInterface": "fixed-optical-bidi",
+      "connector": null,
+      "reach": null,
+      "dataNote": "Wavelength pair pending datasheet verification.",
+      "datasheet": "/api/datasheets/SN-MC-FE-SM-1F.pdf"
+    },
+    {
+      "id": "SN-MC-GE-MM-2F",
+      "name": "10/100/1000 Multimode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100,
+        1000
+      ],
+      "fiberMode": "MM",
+      "fiberCount": 2,
+      "fiberInterface": "fixed-optical",
+      "connector": null,
+      "reach": null,
+      "datasheet": "/api/datasheets/SN-MC-GE-MM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-GE-SM-2F",
+      "name": "10/100/1000 Singlemode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100,
+        1000
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 2,
+      "fiberInterface": "fixed-optical",
+      "connector": null,
+      "reach": null,
+      "datasheet": "/api/datasheets/SN-MC-GE-SM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-GE-SM-1F",
+      "name": "10/100/1000 Singlemode Media Converter, 1 fiber",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        10,
+        100,
+        1000
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 1,
+      "fiberInterface": "fixed-optical-bidi",
+      "connector": null,
+      "reach": null,
+      "dataNote": "Wavelength pair pending datasheet verification.",
+      "datasheet": "/api/datasheets/SN-MC-GE-SM-1F.pdf"
+    },
+    {
+      "id": "SN-MC-1G-10G-MM-2F",
+      "name": "1G/10G Multimode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        1000,
+        10000
+      ],
+      "fiberMode": "MM",
+      "fiberCount": 2,
+      "fiberInterface": "pending-definition",
+      "connector": null,
+      "reach": null,
+      "dataNote": "Port roles and rate conversion behavior require confirmation.",
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-MM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-1G-10G-SM-2F",
+      "name": "1G/10G Singlemode Media Converter, 2 fibers",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        1000,
+        10000
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 2,
+      "fiberInterface": "pending-definition",
+      "connector": null,
+      "reach": null,
+      "dataNote": "Port roles and rate conversion behavior require confirmation.",
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-2F.pdf"
+    },
+    {
+      "id": "SN-MC-1G-10G-SM-1F",
+      "name": "1G/10G Singlemode Media Converter, 1 fiber",
+      "category": "media-converter",
+      "networkRatesMbps": [
+        1000,
+        10000
+      ],
+      "fiberMode": "SM",
+      "fiberCount": 1,
+      "fiberInterface": "pending-definition-bidi",
+      "connector": null,
+      "reach": null,
+      "dataNote": "Port roles, rate conversion behavior and wavelength pair require confirmation.",
+      "datasheet": "/api/datasheets/SN-MC-1G-10G-SM-1F.pdf"
+    }
+  ]
+}

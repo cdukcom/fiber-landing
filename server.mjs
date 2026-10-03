@@ -18,6 +18,7 @@ const patchcordRoutes = JSON.parse(await readFile(join(root,"data/patchcord-rout
 const routeMap = new Map(patchcordRoutes.map(item => [item.path,item]));
 const cableRoutes = JSON.parse(await readFile(join(root,"data/cable-routes.json"),"utf8"));
 const cableRouteMap = new Map(cableRoutes.map(item => [item.path,item]));
+const pdfLogo = await readFile(join(root,"img/logos/fiber-pdf.jpg"));
 const validLengths = new Set([1,2,3,5,10,15,20,25,40,50,80,100]);
 function parsePatchcordPath(pathname) {
   if (routeMap.has(pathname)) return routeMap.get(pathname);
@@ -52,8 +53,62 @@ function titleFor(item) { if(!item) return "Fiber Electronics | Fibra óptica, S
 function descriptionFor(item) { if(item?.slug) return `Consulta la ficha técnica del cable ${item.family==='SM'?'monomodo':'multimodo'} ${item.fiber} de ${item.count} hilos, ${item.construction==='armada'?'armado para exteriores':'para uso interior y exterior'}, disponible por metros.`; if(!item.mode) return `Encuentra patch cords multimodo ${item.subtype} por conectores y longitud. Selecciona la referencia que necesitas y solicita atención por WhatsApp.`; return `Consulta el patch cord multimodo ${item.subtype} ${item.mode} ${item.connA}-${item.connB} de ${item.length} metros y solicita cotización y coordinación de envío por WhatsApp.`; }
 function escapeAttr(value) { return String(value).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("'","&#39;").replaceAll("<","&lt;"); }
 function sitemap() {
-  const urls=["/",...patchcordRoutes.map(item=>item.path),...cableRoutes.map(item=>item.path)];
+  const urls=["/","/bomaker.html",...patchcordRoutes.map(item=>item.path),...cableRoutes.map(item=>item.path)];
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(path=>`  <url><loc>https://www.fibersas.com${path}</loc><lastmod>2026-09-07</lastmod></url>`).join("\n")}\n</urlset>\n`;
+}
+
+function pdfText(value) {
+  return String(value ?? "").replace(/[^\x20-\xFF]/g,"?").replaceAll("\\","\\\\").replaceAll("(","\\(").replaceAll(")","\\)");
+}
+function wrapPdf(value,limit=82) {
+  const words=String(value||"").trim().split(/\s+/),lines=[];let line="";
+  for(const word of words){const next=line?`${line} ${word}`:word;if(next.length>limit&&line){lines.push(line);line=word}else line=next}
+  if(line)lines.push(line);return lines.length?lines:[""];
+}
+function pdfQuantity(row) {
+  const unit=row.qty===1?row.unit:({unidad:"unidades",servicio:"servicios"}[row.unit]||row.unit);
+  return `${row.qty} ${unit}`;
+}
+function buildBomPdf(data) {
+  const state=data?.state&&typeof data.state==="object"?data.state:{};
+  const safeRows=Array.isArray(data?.rows)?data.rows.slice(0,80).map(row=>({description:clean(row.description,260),qty:Math.max(0,Number(row.qty)||0),unit:clean(row.unit,30)})):[];
+  const consolidatedRows=[];
+  for(const row of safeRows){const key=`${row.description.toLocaleLowerCase("es")}\u0000${row.unit.toLocaleLowerCase("es")}`,existing=consolidatedRows.find(item=>item.key===key);if(existing)existing.qty+=row.qty;else consolidatedRows.push({...row,key});}
+  const warnings=Array.isArray(data?.warnings)?data.warnings.slice(0,12).map(item=>clean(item,240)):[];
+  const reference=clean(data?.reference,100)||"PTP-FIBRA";
+  const logical=[];
+  logical.push({text:"Fiber Electronics - BOmaker PTP",font:"F2",size:18,gap:25});
+  logical.push({text:`Referencia: ${reference}`,font:"F2",size:11,gap:17});
+  logical.push({text:`Enlace: ${clean(state.speed,20)} | ${clean(state.fiberType,20)} | ${Number(state.distance)||0} m | ${state.linkMode==="bidi"?"BiDi / 1 fibra":"Duplex / 2 fibras"}`,font:"F1",size:10,gap:15});
+  logical.push({text:`Cable: ${clean(state.cableFiber,20)} | ${Number(state.strands)||0} hilos | ${clean(state.construction,40)} | ${Number(data?.cableMeters)||0} m con reserva`,font:"F1",size:10,gap:24});
+  logical.push({text:"RESUMEN CONSOLIDADO DE MATERIALES",font:"F2",size:12,gap:20});
+  consolidatedRows.forEach((row,index)=>wrapPdf(`${index+1}. ${pdfQuantity(row)} - ${row.description}`,92).forEach((text,lineIndex)=>logical.push({text,font:"F1",size:9,gap:lineIndex===0?13:11,indent:lineIndex?14:0})));
+  if(warnings.length){logical.push({text:"OBSERVACIONES",font:"F2",size:11,gap:22});warnings.forEach(item=>wrapPdf(`- ${item}`,92).forEach(text=>logical.push({text,font:"F1",size:9,gap:12})))}
+  logical.push({text:"Diseño preliminar. Validar presupuesto óptico, ambiente, ruta, normativa y reserva antes de instalar.",font:"F1",size:8,gap:24});
+  logical.push({text:"Fiber Electronics SAS | ventas@fibersas.com | +57 313 499 1444 | www.fibersas.com",font:"F1",size:8,gap:14});
+
+  const pages=[];let page=[],y=790;
+  for(const line of logical){if(y-line.gap<52){pages.push(page);page=[];y=790}page.push({...line,y});y-=line.gap}
+  if(page.length)pages.push(page);
+  const objectCount=5+pages.length*2,objects=new Array(objectCount+1);
+  objects[1]="<< /Type /Catalog /Pages 2 0 R >>";
+  objects[3]="<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+  objects[4]="<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+  objects[5]=Buffer.concat([Buffer.from(`<< /Type /XObject /Subtype /Image /Width 360 /Height 360 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${pdfLogo.length} >>\nstream\n`,"latin1"),pdfLogo,Buffer.from("\nendstream","latin1")]);
+  const kids=[];
+  pages.forEach((lines,index)=>{const pageId=6+index*2,contentId=pageId+1;kids.push(`${pageId} 0 R`);const commands=["0.09 0.13 0.2 rg"];
+    lines.forEach(line=>commands.push(`BT /${line.font} ${line.size} Tf 1 0 0 1 ${50+(line.indent||0)} ${line.y} Tm (${pdfText(line.text)}) Tj ET`));
+    if(index===0)commands.push("q 66 0 0 66 478 744 cm /Im1 Do Q");
+    commands.push("0.15 0.39 0.92 RG 2 w 50 815 m 545 815 l S");
+    const stream=commands.join("\n");
+    objects[contentId]=`<< /Length ${Buffer.byteLength(stream,"latin1")} >>\nstream\n${stream}\nendstream`;
+    objects[pageId]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /XObject << /Im1 5 0 R >> >> /Contents ${contentId} 0 R >>`;
+  });
+  objects[2]=`<< /Type /Pages /Kids [${kids.join(" ")}] /Count ${pages.length} >>`;
+  const chunks=[Buffer.from("%PDF-1.4\n%Fiber Electronics\n","latin1")],offsets=new Array(objectCount+1).fill(0);let offset=chunks[0].length;
+  for(let id=1;id<=objectCount;id++){offsets[id]=offset;const value=Buffer.isBuffer(objects[id])?objects[id]:Buffer.from(String(objects[id]),"latin1"),chunk=Buffer.concat([Buffer.from(`${id} 0 obj\n`,"latin1"),value,Buffer.from("\nendobj\n","latin1")]);chunks.push(chunk);offset+=chunk.length}
+  const xrefOffset=offset,xref=[`xref\n0 ${objectCount+1}\n0000000000 65535 f \n`];for(let id=1;id<=objectCount;id++)xref.push(`${String(offsets[id]).padStart(10,"0")} 00000 n \n`);
+  xref.push(`trailer\n<< /Size ${objectCount+1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`);chunks.push(Buffer.from(xref.join(""),"latin1"));return Buffer.concat(chunks);
 }
 async function renderPage(item, routeType='patchcord') { let html=await readFile(join(root,"index.html"),"utf8"); if(!item) return html; const title=titleFor(item),description=descriptionFor(item),url=`https://www.fibersas.com${item.path}`,dataAttribute=routeType==='cable'?'data-cable-route':'data-patchcord-route'; html=html.replace(/<title>.*?<\/title>/s,`<title>${escapeAttr(title)}</title>`).replace(/<meta name="description" content="[^"]*">/,`<meta name="description" content="${escapeAttr(description)}">`).replace(/<link rel="canonical" href="[^"]*">/,`<link rel="canonical" href="${url}">`).replace(/<meta property="og:title" content="[^"]*">/,`<meta property="og:title" content="${escapeAttr(title)}">`).replace(/<meta property="og:description" content="[^"]*">/,`<meta property="og:description" content="${escapeAttr(description)}">`).replace(/<meta property="og:url" content="[^"]*">/,`<meta property="og:url" content="${url}">`).replace("<body>",`<body ${dataAttribute}='${escapeAttr(JSON.stringify(item))}'>`); return html; }
 
@@ -93,6 +148,7 @@ const server=createServer(async(req,res)=>{ try {
   const url=new URL(req.url,`http://${req.headers.host||"localhost"}`);
   if(url.pathname==="/api/health") return json(res,200,{ok:true,database:Boolean(pool),service:"fiber"});
   if(url.pathname==="/api/popular-configurations") return json(res,200,{items:await popularConfigurations()});
+  if(url.pathname==="/api/bomaker/pdf"&&req.method==="POST") { if(!sameOrigin(req)) return json(res,403,{error:"Invalid origin"}); const data=await body(req),pdf=buildBomPdf(data); res.writeHead(200,{"content-type":"application/pdf","content-disposition":`attachment; filename="BOmaker-${clean(data.reference,80)||"PTP"}.pdf"`,"cache-control":"no-store","x-content-type-options":"nosniff"}); return res.end(pdf); }
   if(url.pathname==="/sitemap.xml") { res.writeHead(200,{"content-type":"application/xml; charset=utf-8","cache-control":"public, max-age=3600"}); return res.end(sitemap()); }
   if(url.pathname==="/api/events"&&req.method==="POST") { const data=await body(req); if(!allowedEvents.has(data.type)) return json(res,400,{error:"Unsupported event"}); const values=[data.type,clean(data.path,300),clean(data.line,80)||null,clean(data.reference,160)||null,clean(data.sessionId,80),clean(data.source,100)||null,data.metadata&&typeof data.metadata==="object"?data.metadata:{}]; if(pool) await pool.query(`INSERT INTO fiber_events(event_type,path,line,reference,session_id,source,metadata) VALUES($1,$2,$3,$4,$5,$6,$7)`,values); return json(res,202,{ok:true}); }
   if(url.pathname==="/api/admin/login"&&req.method==="POST") { if(!sameOrigin(req)) return json(res,403,{error:"Invalid origin"}); const ip=req.socket.remoteAddress||"unknown",record=attempts.get(ip)||{count:0,reset:Date.now()+600000}; if(record.reset<Date.now()) Object.assign(record,{count:0,reset:Date.now()+600000}); if(record.count>=8) return json(res,429,{error:"Too many attempts"}); const data=await body(req); if(data.username!==adminUser||!validPassword(data.password)){record.count++;attempts.set(ip,record);return json(res,401,{error:"Invalid credentials"});} attempts.delete(ip); const token=sign({user:adminUser,exp:Date.now()+12*60*60*1000,nonce:randomBytes(8).toString("hex")}); return json(res,200,{ok:true},{"set-cookie":`fiber_admin=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Strict; Max-Age=43200${production?"; Secure":""}`}); }
@@ -103,7 +159,7 @@ const server=createServer(async(req,res)=>{ try {
   if(url.pathname.startsWith("/patch-cords/")) { if(!item) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(item); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
   const cableItem=parseCablePath(url.pathname);
   if(url.pathname.startsWith("/cables-fibra/")) { if(!cableItem) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(cableItem,'cable'); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
-  let requested=url.pathname==="/"?"/index.html":url.pathname==="/admin"||url.pathname==="/admin/"?"/admin.html":url.pathname;
+  let requested=url.pathname==="/"?"/index.html":url.pathname==="/admin"||url.pathname==="/admin/"?"/admin.html":url.pathname==="/bomaker"||url.pathname==="/bomaker/"?"/bomaker.html":url.pathname;
   const safe=normalize(requested).replace(/^(\.\.(\/|\\|$))+/g,""); const file=join(root,safe); if(!file.startsWith(root)) return json(res,403,{error:"Forbidden"}); const info=await stat(file); if(!info.isFile()) throw Object.assign(new Error("Not found"),{code:"ENOENT"}); res.writeHead(200,{"content-type":mime[extname(file).toLowerCase()]||"application/octet-stream","cache-control":production&&!file.endsWith(".html")?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); res.end(await readFile(file));
 } catch(error) { console.error('Request failed',req.method,req.url,error); const notFound=error?.code==="ENOENT"; if(!res.headersSent) json(res,notFound?404:500,{error:notFound?"Not found":"Server error"}); else res.end(); }});
 server.listen(port,()=>console.log(`Fiber Electronics listening on ${port}`));

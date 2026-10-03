@@ -89,6 +89,12 @@ function openExpansion(container, grid, renderFn, card, options = {}) {
     container.innerHTML = ''
     renderFn(container, options)
 
+    const key = card.dataset.link
+    if (['patchcord','odf','cablefo','cajaob','switch','mc','sfp'].includes(key)) {
+      const content = container.querySelector('.expansion-content') || container.querySelector('.expansion-panel')
+      content?.insertAdjacentHTML('beforeend', `<a class="bomaker-context-link" href="/bomaker.html?origin=${encodeURIComponent(key)}"><span>¿Está armando un enlace completo?</span><b>Diseñarlo en BOmaker →</b></a>`)
+    }
+
     container.classList.add('active')
 
     const backBtn = container.querySelector('.expansion-back')

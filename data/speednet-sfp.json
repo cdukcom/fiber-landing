@@ -1,0 +1,1855 @@
+{
+  "schemaVersion": 1,
+  "source": "Initial commercial catalog supplied by Fiber Electronics",
+  "sourceStatus": "audited-against-manufacturer-files-2026-09-24",
+  "items": [
+    {
+      "id": "SN-1G-BIDI-10-1550-1310",
+      "name": "1G SFP BiDi 10 km Tx1550/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-10-1310-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -6,
+        "rxMinDbm": -23,
+        "nominalDb": 17,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "SN-1G-BIDI-10-1550-1310 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-10-1550-1310.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-10-1310-1550",
+      "name": "1G SFP BiDi 10 km Tx1310/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-10-1550-1310",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -6,
+        "rxMinDbm": -23,
+        "nominalDb": 17,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-1G-BIDI-10-1310-1550 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-10-1310-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-40-1490-1310",
+      "name": "1G SFP BiDi 40 km Tx1490/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-40-1310-1490",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -14,
+        "rxMinDbm": -32,
+        "nominalDb": 18,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-40-1490-1310.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-40-1310-1490",
+      "name": "1G SFP BiDi 40 km Tx1310/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-1G-BIDI-40-1490-1310",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -14,
+        "rxMinDbm": -32,
+        "nominalDb": 18,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-40-1310-1490.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-60-1550-1310",
+      "name": "1G SFP BiDi 60 km Tx1550/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 60,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-60-1310-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -3,
+        "rxMinDbm": -24,
+        "nominalDb": 21,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "SN-1G-BIDI-60-1550-1310 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-60-1550-1310.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-60-1310-1550",
+      "name": "1G SFP BiDi 60 km Tx1310/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 60,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-60-1550-1310",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -3,
+        "rxMinDbm": -24,
+        "nominalDb": 21,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-1G-BIDI-60-1310-1550 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-60-1310-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-80-1550-1310",
+      "name": "1G SFP BiDi 80 km Tx1550/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-80-1310-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -9,
+        "rxMinDbm": -33,
+        "nominalDb": 24,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-80-1550-1310.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-80-1310-1550",
+      "name": "1G SFP BiDi 80 km Tx1310/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-80-1550-1310",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -9,
+        "rxMinDbm": -33,
+        "nominalDb": 24,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-80-1310-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-100-1550-1490",
+      "name": "1G SFP BiDi 100 km Tx1550/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 100,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-1G-BIDI-100-1490-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -9,
+        "rxMinDbm": -40,
+        "nominalDb": 31,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-100-1550-1490.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-100-1490-1550",
+      "name": "1G SFP BiDi 100 km Tx1490/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 100,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-100-1550-1490",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -9,
+        "rxMinDbm": -40,
+        "nominalDb": 31,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-100-1490-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-120-1550-1490",
+      "name": "1G SFP BiDi 120 km Tx1550/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 120,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-1G-BIDI-120-1490-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8,
+        "rxMinDbm": -40,
+        "nominalDb": 32,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-120-1550-1490.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-120-1490-1550",
+      "name": "1G SFP BiDi 120 km Tx1490/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 120,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-120-1550-1490",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8,
+        "rxMinDbm": -40,
+        "nominalDb": 32,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-120-1490-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-160-1550-1490",
+      "name": "1G SFP BiDi 160 km Tx1550/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 160,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-1G-BIDI-160-1490-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -7,
+        "rxMinDbm": -41,
+        "nominalDb": 34,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-160-1550-1490.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-160-1490-1550",
+      "name": "1G SFP BiDi 160 km Tx1490/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 160,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-160-1550-1490",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -7,
+        "rxMinDbm": -41,
+        "nominalDb": 34,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-160-1490-1550.pdf"
+    },
+    {
+      "id": "SN-1G-SX-550M",
+      "name": "1G SFP SX 850 nm 550 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 550,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 850,
+      "ddmi": true,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-1G-SX-550M.pdf"
+    },
+    {
+      "id": "SN-1G-LX-10",
+      "name": "1G SFP LX 1310 nm 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -18,
+        "rxMinDbm": -29,
+        "nominalDb": 11,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-LX-10.pdf"
+    },
+    {
+      "id": "SN-1G-LX-20",
+      "name": "1G SFP LX 1310 nm 20 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "powerMetric": "average power",
+        "txMinDbm": -9,
+        "rxMinDbm": -20,
+        "nominalDb": 11,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light CLSFP13GELXD datasheet, received 2026-09-24"
+      },
+      "datasheet": "/api/datasheets/SN-1G-LX-20.pdf"
+    },
+    {
+      "id": "SN-1G-LX-40-1310",
+      "name": "1G SFP LX 1310 nm 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -14,
+        "rxMinDbm": -31,
+        "nominalDb": 17,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-LX-40-1310.pdf"
+    },
+    {
+      "id": "SN-1G-LX-40-1550",
+      "name": "1G SFP LX 1550 nm 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -5,
+        "rxMinDbm": -24,
+        "nominalDb": 19,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "SN-1G-LX-40-1550 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-LX-40-1550.pdf"
+    },
+    {
+      "id": "SN-1G-ZX-80",
+      "name": "1G SFP ZX 1550 nm 80 km DFB",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "laser": "DFB",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -9,
+        "rxMinDbm": -33,
+        "nominalDb": 24,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-ZX-80.pdf"
+    },
+    {
+      "id": "SN-1G-ZX-120",
+      "name": "1G SFP ZX 1550 nm 120 km DFB",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 120,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "laser": "DFB",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8,
+        "rxMinDbm": -44,
+        "nominalDb": 36,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-ZX-120.pdf"
+    },
+    {
+      "id": "SN-1G-ZX-160",
+      "name": "1G SFP ZX 1550 nm 160 km DFB",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 160,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "laser": "DFB",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": 3,
+        "rxMinDbm": -34,
+        "nominalDb": 37,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "SN-1G-ZX-160 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-ZX-160.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-10-1270-1330",
+      "name": "10G SFP+ BiDi 10 km Tx1270/Rx1330",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1270,
+      "rxWavelengthNm": 1330,
+      "pairId": "SN-10G-BIDI-10-1330-1270",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.5,
+        "rxMinDbm": -17.5,
+        "nominalDb": 9,
+        "wavelengthNm": 1270,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-10-1270-1330.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-10-1330-1270",
+      "name": "10G SFP+ BiDi 10 km Tx1330/Rx1270",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1330,
+      "rxWavelengthNm": 1270,
+      "pairId": "SN-10G-BIDI-10-1270-1330",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.5,
+        "rxMinDbm": -17.5,
+        "nominalDb": 9,
+        "wavelengthNm": 1330,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-10-1330-1270.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-20-1270-1330",
+      "name": "10G SFP+ BiDi 20 km Tx1270/Rx1330",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1270,
+      "rxWavelengthNm": 1330,
+      "pairId": "SN-10G-BIDI-20-1330-1270",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.5,
+        "rxMinDbm": -17.5,
+        "nominalDb": 9,
+        "wavelengthNm": 1270,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-20-1270-1330.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-20-1330-1270",
+      "name": "10G SFP+ BiDi 20 km Tx1330/Rx1270",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1330,
+      "rxWavelengthNm": 1270,
+      "pairId": "SN-10G-BIDI-20-1270-1330",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.5,
+        "rxMinDbm": -17.5,
+        "nominalDb": 9,
+        "wavelengthNm": 1330,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-20-1330-1270.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-40-1270-1330",
+      "name": "10G SFP+ BiDi 40 km Tx1270/Rx1330",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1270,
+      "rxWavelengthNm": 1330,
+      "pairId": "SN-10G-BIDI-40-1330-1270",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -3.5,
+        "rxMinDbm": -19.5,
+        "nominalDb": 16,
+        "wavelengthNm": 1270,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-40-1270-1330.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-40-1330-1270",
+      "name": "10G SFP+ BiDi 40 km Tx1330/Rx1270",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1330,
+      "rxWavelengthNm": 1270,
+      "pairId": "SN-10G-BIDI-40-1270-1330",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -3.5,
+        "rxMinDbm": -19.5,
+        "nominalDb": 16,
+        "wavelengthNm": 1330,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-40-1330-1270.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-60-1270-1330",
+      "name": "10G SFP+ BiDi 60 km Tx1270/Rx1330",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 60,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1270,
+      "rxWavelengthNm": 1330,
+      "pairId": "SN-10G-BIDI-60-1330-1270",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -2.5,
+        "rxMinDbm": -23.5,
+        "nominalDb": 21,
+        "wavelengthNm": 1270,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-60-1270-1330.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-60-1330-1270",
+      "name": "10G SFP+ BiDi 60 km Tx1330/Rx1270",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 60,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1330,
+      "rxWavelengthNm": 1270,
+      "pairId": "SN-10G-BIDI-60-1270-1330",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -2.5,
+        "rxMinDbm": -23.5,
+        "nominalDb": 21,
+        "wavelengthNm": 1330,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-60-1330-1270.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-80-1490-1550",
+      "name": "10G SFP+ BiDi 80 km Tx1490/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-10G-BIDI-80-1550-1490",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -7,
+        "rxMinDbm": -32,
+        "nominalDb": 25,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-80-1490-1550.pdf"
+    },
+    {
+      "id": "SN-10G-BIDI-80-1550-1490",
+      "name": "10G SFP+ BiDi 80 km Tx1550/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-10G-BIDI-80-1490-1550",
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -7,
+        "rxMinDbm": -32,
+        "nominalDb": 25,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-BIDI-80-1550-1490.pdf"
+    },
+    {
+      "id": "SN-10G-SR-300-COB",
+      "name": "10G SFP+ SR 850 nm 300 m COB",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 300,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 850,
+      "construction": "COB",
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-SR-300-COB.pdf"
+    },
+    {
+      "id": "SN-10G-SR-300-COM",
+      "name": "10G SFP+ SR 850 nm 300 m COM",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 300,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 850,
+      "construction": "COM-pending-definition",
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-SR-300-COM.pdf"
+    },
+    {
+      "id": "SN-10G-LRM-220M",
+      "name": "10G SFP+ LRM 1310 nm 220 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 220,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-LRM-220M.pdf"
+    },
+    {
+      "id": "SN-10G-LR-2",
+      "name": "10G SFP+ LR 1310 nm 2 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 2,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-LR-2.pdf"
+    },
+    {
+      "id": "SN-10G-LR-10",
+      "name": "10G SFP+ LR 1310 nm 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.5,
+        "rxMinDbm": -17.5,
+        "nominalDb": 9,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-LR-10.pdf"
+    },
+    {
+      "id": "SN-10G-LRL-40",
+      "name": "10G SFP+ LRL 1310 nm 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -4.5,
+        "rxMinDbm": -19.5,
+        "nominalDb": 15,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "dataNote": "Commercial designation pending datasheet verification.",
+      "datasheet": "/api/datasheets/SN-10G-LRL-40.pdf"
+    },
+    {
+      "id": "SN-10G-ER-40",
+      "name": "10G SFP+ ER 1550 nm 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -10,
+        "rxMinDbm": -24,
+        "nominalDb": 14,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-ER-40.pdf"
+    },
+    {
+      "id": "SN-10G-ZR-80",
+      "name": "10G SFP+ ZR 1550 nm 80 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8.2,
+        "rxMinDbm": -33.2,
+        "nominalDb": 25,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-ZR-80.pdf"
+    },
+    {
+      "id": "SN-10G-ZR-100",
+      "name": "10G SFP+ ZR 1550 nm 100 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 100,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -7,
+        "rxMinDbm": -34,
+        "nominalDb": 27,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-ZR-100.pdf"
+    },
+    {
+      "id": "SN-10G-ZR-120",
+      "name": "10G SFP+ ZR 1550 nm 120 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 120,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -5,
+        "rxMinDbm": -34,
+        "nominalDb": 29,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-10G-ZR-120.pdf"
+    },
+    {
+      "id": "SN-25G-SR-100M",
+      "name": "25G SFP28 SR 850 nm 100 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP28",
+      "ethernetRateGbps": 25,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 100,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 850,
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-25G-SR-100M.pdf"
+    },
+    {
+      "id": "SN-25G-LR-10",
+      "name": "25G SFP28 LR 1310 nm 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP28",
+      "ethernetRateGbps": 25,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -7,
+        "rxMinDbm": -11.4,
+        "nominalDb": 4.4,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-25G-LR-10 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-25G-LR-10.pdf"
+    },
+    {
+      "id": "SN-25G-ER-40",
+      "name": "25G SFP28 ER 1310 nm 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "SFP28",
+      "ethernetRateGbps": 25,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": 0,
+        "rxMinDbm": -18,
+        "nominalDb": 18,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-25G-ER-40 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-25G-ER-40.pdf"
+    },
+    {
+      "id": "SN-40G-SR4-100M",
+      "name": "40G QSFP+ 850 nm MPO 100 m",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "parallel-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 100,
+        "unit": "m"
+      },
+      "connector": "MPO",
+      "wavelengthNm": 850,
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-40G-SR4-100M.pdf"
+    },
+    {
+      "id": "SN-40G-LR4-10",
+      "name": "40G QSFP+ 1310 nm LC 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -10.5,
+        "rxMinDbm": -16.5,
+        "nominalDb": 6,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-40G-LR4-10.pdf"
+    },
+    {
+      "id": "SN-40G-ER4-20",
+      "name": "40G QSFP+ LR4L 1310 nm LC 20 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power-per-lane",
+        "powerMetric": "average power per lane",
+        "txMinDbm": -3,
+        "rxMinDbm": -13,
+        "nominalDb": 10,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light CLQSFP40GLRL datasheet, received 2026-09-24"
+      },
+      "datasheet": "/api/datasheets/SN-40G-ER4-20.pdf"
+    },
+    {
+      "id": "SN-40G-ER4-40",
+      "name": "40G QSFP+ 1310 nm LC 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -5.5,
+        "rxMinDbm": -21.3,
+        "nominalDb": 16.8,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-40G-ER4-40.pdf"
+    },
+    {
+      "id": "SN-100G-SR4-100M",
+      "name": "100G QSFP28 850 nm MPO 100 m",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "parallel-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 100,
+        "unit": "m"
+      },
+      "connector": "MPO",
+      "wavelengthNm": 850,
+      "ddmi": null,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-100G-SR4-100M.pdf"
+    },
+    {
+      "id": "SN-100G-LR4-10",
+      "name": "100G QSFP28 LR4 1310 nm LC 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8,
+        "rxMinDbm": -16.6,
+        "nominalDb": 8.6,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-100G-LR4-10.pdf"
+    },
+    {
+      "id": "SN-100G-LR4-20",
+      "name": "100G QSFP28 LR4 1310 nm LC 20 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -8,
+        "rxMinDbm": -16.6,
+        "nominalDb": 8.6,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-100G-LR4-20.pdf"
+    },
+    {
+      "id": "SN-100G-ER4-40",
+      "name": "100G QSFP28 ER4 1310 nm LC 40 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "datasheet": "/api/datasheets/SN-100G-ER4-40.pdf",
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -5,
+        "rxMinDbm": -21,
+        "nominalDb": 16,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      }
+    },
+    {
+      "id": "SN-100G-ZR4-80",
+      "name": "100G QSFP28 ZR4 1310 nm LC 80 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": null,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -5,
+        "rxMinDbm": -34,
+        "nominalDb": 29,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-100G-ZR4-80.pdf"
+    },
+    {
+      "id": "SN-25G-BIDI-10-1270-1330",
+      "name": "25G SFP28 BiDi 10 km Tx1270/Rx1330",
+      "category": "optical-transceiver",
+      "formFactor": "SFP28",
+      "ethernetRateGbps": 25,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1270,
+      "rxWavelengthNm": 1330,
+      "pairId": "SN-25G-BIDI-10-1330-1270",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -2,
+        "rxMinDbm": -16,
+        "nominalDb": 14,
+        "wavelengthNm": 1270,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-25G-BIDI-10-1270-1330 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "source": "C-LIGHT 25G BiDi SFP28 official product family",
+      "datasheet": "/api/datasheets/SN-25G-BIDI-10-1270-1330.pdf"
+    },
+    {
+      "id": "SN-25G-BIDI-10-1330-1270",
+      "name": "25G SFP28 BiDi 10 km Tx1330/Rx1270",
+      "category": "optical-transceiver",
+      "formFactor": "SFP28",
+      "ethernetRateGbps": 25,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1330,
+      "rxWavelengthNm": 1270,
+      "pairId": "SN-25G-BIDI-10-1270-1330",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -2,
+        "rxMinDbm": -16,
+        "nominalDb": 14,
+        "wavelengthNm": 1330,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-25G-BIDI-10-1330-1270 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "source": "C-LIGHT 25G BiDi SFP28 official product family",
+      "datasheet": "/api/datasheets/SN-25G-BIDI-10-1330-1270.pdf"
+    },
+    {
+      "id": "SN-100G-BIDI-40-1304-1309",
+      "name": "100G QSFP28 BiDi ER1 40 km Tx1304/Rx1309",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1304,
+      "rxWavelengthNm": 1309,
+      "pairId": "SN-100G-BIDI-40-1309-1304",
+      "latchColor": "blue",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": 1.7,
+        "rxMinDbm": -16,
+        "nominalDb": 17.7,
+        "wavelengthNm": 1304,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-100G-BIDI-40-PAIR-1304-1309 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-100G-BIDI-40-PAIR-1304-1309.pdf"
+    },
+    {
+      "id": "SN-100G-BIDI-40-1309-1304",
+      "name": "100G QSFP28 BiDi ER1 40 km Tx1309/Rx1304",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP28",
+      "ethernetRateGbps": 100,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 40,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1309,
+      "rxWavelengthNm": 1304,
+      "pairId": "SN-100G-BIDI-40-1304-1309",
+      "latchColor": "green",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": 1.7,
+        "rxMinDbm": -16,
+        "nominalDb": 17.7,
+        "wavelengthNm": 1309,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-100G-BIDI-40-PAIR-1304-1309 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-100G-BIDI-40-PAIR-1304-1309.pdf"
+    },
+    {
+      "id": "SN-1G-COPPER-RJ45-100M",
+      "name": "1G Copper SFP 1000BASE-T RJ45 100 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "copper",
+      "fiberMode": "COPPER",
+      "reach": {
+        "value": 100,
+        "unit": "m"
+      },
+      "connector": "RJ45",
+      "ddmi": false,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-1G-COPPER-RJ45-100M.pdf"
+    },
+    {
+      "id": "SN-2.5G-COPPER-RJ45-100M",
+      "name": "2.5G Copper SFP 2.5G/1G/100M RJ45 100 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 2.5,
+      "topology": "copper",
+      "fiberMode": "COPPER",
+      "reach": {
+        "value": 100,
+        "unit": "m"
+      },
+      "connector": "RJ45",
+      "ddmi": false,
+      "opticalBudget": null,
+      "manufacturerPartNumber": "CLSFP2GTX1",
+      "datasheet": "/api/datasheets/SN-2.5G-COPPER-RJ45-100M.pdf"
+    },
+    {
+      "id": "SN-10G-COPPER-RJ45-30M",
+      "name": "10G Copper SFP+ 10GBASE-T RJ45 30 m",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "copper",
+      "fiberMode": "COPPER",
+      "reach": {
+        "value": 30,
+        "unit": "m"
+      },
+      "connector": "RJ45",
+      "ddmi": false,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-COPPER-RJ45-30M.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-20-1310-1550",
+      "name": "1G SFP BiDi 20 km Tx1310/Rx1550",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1550,
+      "pairId": "SN-1G-BIDI-20-1550-1310",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -8,
+        "rxMinDbm": -24,
+        "nominalDb": 16,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "SN-1G-BIDI-20-1310-1550 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-20-1310-1550.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-20-1550-1310",
+      "name": "1G SFP BiDi 20 km Tx1550/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1550,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-20-1310-1550",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power",
+        "txMinDbm": -8,
+        "rxMinDbm": -24,
+        "nominalDb": 16,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "SN-1G-BIDI-20-1550-1310 Product Specification, Optical Characteristics",
+        "powerMetric": "average power"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-20-1550-1310.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-20-1310-1490",
+      "name": "1G SFP BiDi 20 km Tx1310/Rx1490",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1310,
+      "rxWavelengthNm": 1490,
+      "pairId": "SN-1G-BIDI-20-1490-1310",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -18,
+        "rxMinDbm": -32,
+        "nominalDb": 14,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-20-1310-1490.pdf"
+    },
+    {
+      "id": "SN-1G-BIDI-20-1490-1310",
+      "name": "1G SFP BiDi 20 km Tx1490/Rx1310",
+      "category": "optical-transceiver",
+      "formFactor": "SFP",
+      "ethernetRateGbps": 1,
+      "topology": "single-fiber-bidi",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 20,
+        "unit": "km"
+      },
+      "connector": "LC simplex",
+      "txWavelengthNm": 1490,
+      "rxWavelengthNm": 1310,
+      "pairId": "SN-1G-BIDI-20-1310-1490",
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -18,
+        "rxMinDbm": -32,
+        "nominalDb": 14,
+        "wavelengthNm": 1490,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-1G-BIDI-20-1490-1310.pdf"
+    },
+    {
+      "id": "SN-10G-SR-300M-IND",
+      "name": "10G SFP+ SR 850 nm 300 m Industrial",
+      "category": "optical-transceiver",
+      "formFactor": "SFP+",
+      "ethernetRateGbps": 10,
+      "topology": "dual-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 300,
+        "unit": "m"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 850,
+      "ddmi": true,
+      "temperatureGrade": "industrial",
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-10G-SR-300M-IND.pdf"
+    },
+    {
+      "id": "SN-40G-SR4-150M",
+      "name": "40G QSFP+ SR4 850 nm 150 m MPO",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "parallel-fiber",
+      "fiberMode": "MM",
+      "reach": {
+        "value": 150,
+        "unit": "m"
+      },
+      "connector": "MPO",
+      "wavelengthNm": 850,
+      "ddmi": true,
+      "opticalBudget": null,
+      "datasheet": "/api/datasheets/SN-40G-SR4-150M.pdf"
+    },
+    {
+      "id": "SN-40G-ZR4-80",
+      "name": "40G QSFP+ ZR4 80 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP+",
+      "ethernetRateGbps": 40,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 80,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "oma-budget",
+        "powerMetric": "OMA",
+        "txMinDbm": -6,
+        "rxMinDbm": -34,
+        "nominalDb": 28,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light Parameter of standard SFPs.xls, received 2026-09-23"
+      },
+      "datasheet": "/api/datasheets/SN-40G-ZR4-80.pdf"
+    },
+    {
+      "id": "SN-400G-QSFPDD-LR4-10",
+      "name": "400G QSFP-DD LR4 10 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP-DD",
+      "ethernetRateGbps": 400,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 10,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1310,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "average-power-per-lane",
+        "powerMetric": "average power per lane",
+        "txMinDbm": -2.3,
+        "rxMinDbm": -7.3,
+        "nominalDb": 5,
+        "wavelengthNm": 1310,
+        "defaultAttenuationDbKm": 0.35,
+        "source": "C-Light CL400GQDDLR4 datasheet, received 2026-09-23",
+        "engineeringNote": "Loss check per lane; final compliance also requires OMA, TDECQ/SECQ and stressed-receiver limits."
+      },
+      "datasheet": "/api/datasheets/SN-400G-QSFPDD-LR4-10.pdf"
+    },
+    {
+      "id": "SN-400G-QSFPDD-ZR-120",
+      "name": "400G QSFP-DD ZR Coherent 120 km",
+      "category": "optical-transceiver",
+      "formFactor": "QSFP-DD",
+      "ethernetRateGbps": 400,
+      "topology": "dual-fiber",
+      "fiberMode": "SM",
+      "reach": {
+        "value": 120,
+        "unit": "km"
+      },
+      "connector": "LC duplex",
+      "wavelengthNm": 1550,
+      "ddmi": true,
+      "opticalBudget": {
+        "method": "coherent-channel-loss",
+        "powerMetric": "channel insertion loss",
+        "txMinDbm": -13,
+        "rxMinDbm": -18,
+        "nominalDb": 3,
+        "wavelengthNm": 1550,
+        "defaultAttenuationDbKm": 0.25,
+        "source": "C-Light CL400GQDDZR-120 datasheet, received 2026-09-23",
+        "engineeringNote": "Checks the published 3 dB channel-insertion limit only; deployment also requires ROSNR, CD, PMD and PDL verification."
+      },
+      "datasheet": "/api/datasheets/SN-400G-QSFPDD-ZR-120.pdf"
+    }
+  ]
+}

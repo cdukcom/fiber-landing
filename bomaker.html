@@ -1,130 +1,69 @@
-<!-- bomaker.html -->
-
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es-CO">
 <head>
-  <meta charset="UTF-8">
-  <title>BOMaker - Fiber Electronics</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-
-  <link rel="stylesheet" href="./css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Diseñador de enlaces PTP de fibra óptica | BOmaker Fiber Electronics</title>
+  <meta name="description" content="Diseña un enlace punto a punto de fibra óptica, valida compatibilidad y genera una lista de materiales editable para cotizar con Fiber Electronics.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <link rel="canonical" href="https://www.fibersas.com/bomaker.html">
+  <link rel="icon" href="/img/logos/fiber.png">
+  <link rel="stylesheet" href="/css/styles.css?v=20260929-bomaker-1">
+  <meta property="og:title" content="BOmaker PTP | Diseñe su enlace de fibra óptica">
+  <meta property="og:description" content="Configure ambos extremos, cable, terminaciones y patch cords. Obtenga una lista de materiales editable.">
+  <meta property="og:url" content="https://www.fibersas.com/bomaker.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BOmaker PTP","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://www.fibersas.com/bomaker.html","provider":{"@type":"Organization","name":"Fiber Electronics S.A.S.","url":"https://www.fibersas.com/"}}</script>
 </head>
-
-<body>
-
-  <div class="bomaker-wrapper">
-
-    <!-- HEADER -->
-    <header class="header">
-      <div class="container header-inner">
-        <a href="index.html">
-          <img src="./img/logos/fiber.png" alt="Fiber Electronics" class="logo">
-        </a>
-        <nav class="nav">
-          <a href="index.html#fibra">Fibra Cableado</a>
-          <a href="index.html#activo">Switches MC SFP</a>
-          <a href="index.html">Inicio</a>
-          <a href="index.html#contact" class="btn primary">Contacto</a>
-        </nav>
-      </div>
-    </header>
-    
-    <main>
-      <!-- CONTENIDO -->
-      <div class="bomaker-grid">
-
-         <!-- IMÁGENES -->
-         <div class="bomaker-images">
-            <img src="./img/bomaker/design1.png" alt="BOMaker diseño 1">
-            <img src="./img/bomaker/design2.png" alt="BOMaker diseño 2">
-            <img src="./img/bomaker/design3.png" alt="BOMaker diseño 3">
-            <img src="./img/bomaker/design4.png" alt="BOMaker diseño 4">
-         </div>
-
-         <!-- TEXTO -->
-         <div class="bomaker-content">
-
-           <p>
-             BOMaker es una plataforma diseñada para simplificar la creación de soluciones
-             tecnológicas, permitiendo estructurar proyectos completos de forma rápida,
-             organizada y visual.
-           </p>
-
-           <p>
-             Desde redes de fibra óptica hasta soluciones de switching, BOMaker permite construir,
-             visualizar y escalar arquitecturas tecnológicas sin necesidad de procesos complejos.
-           </p>
-
-           <p>
-             Actualmente la hemos desarrollado para nuestro personal pero pronto estará disponible 
-             para nuestros clientes, facilitando la toma de decisiones y reduciendo tiempos de implementación.
-           </p>
-
-           <p class="bomaker-highlight">
-             Muy pronto podrás diseñar soluciones completas en minutos. Mientras, contactanos para
-             ayudarte a diseñar y estructurar tu próximo proyecto de fibra óptica o networking.
-           </p>
-
-           <!-- BOTÓN WHATSAPP -->
-           <a 
-             href="https://wa.me/573134991444?text=Hola,%20quiero%20más%20información%20sobre%20BOMaker"
-             target="_blank"
-             rel="noopener noreferrer"
-             class="btn-whatsapp"
-            >
-             Contáctanos por WhatsApp
-           </a>
-
-          </div>
-
+<body class="bomaker-page">
+  <header class="header"><div class="container header-inner"><a href="/" aria-label="Volver a Fiber Electronics"><img src="/img/logos/fiber.png" alt="Fiber Electronics" class="logo" width="160" height="80"></a><nav class="nav bomaker-nav" aria-label="Navegación de BOmaker"><a href="/">Productos</a><a href="#resultado">Resultado</a><a class="btn primary" href="#configurador">Diseñar enlace</a></nav></div></header>
+  <main>
+    <section class="bomaker-hero"><div class="container bomaker-hero-grid"><div><span class="bomaker-eyebrow">BOmaker · Punto a punto</span><h1>Diseñe su enlace de fibra óptica.</h1><p>Construya ambos extremos, seleccione la fibra y obtenga una lista de materiales coherente. Las recomendaciones se pueden editar y las incompatibilidades se explican sin bloquear el diseño.</p><a class="btn primary" href="#configurador">Comenzar diseño</a></div><div class="ptp-mini-map" aria-label="Diagrama de enlace punto a punto"><div><b>A</b><span>Equipo</span></div><i></i><div><span>Terminación</span></div><strong>FIBRA</strong><div><span>Terminación</span></div><i></i><div><b>B</b><span>Equipo</span></div></div></div></section>
+    <section class="bomaker-builder" id="configurador"><div class="container">
+      <div class="builder-heading"><div><span class="bomaker-eyebrow">Configuración guiada</span><h2>Parámetros generales del enlace</h2></div><button class="builder-reset" id="bom-reset" type="button">Restablecer</button></div>
+      <form id="bom-form" class="bom-form">
+        <fieldset class="bom-card bom-general"><legend>1. Enlace</legend><div class="bom-fields">
+          <label>Velocidad<select name="speed"><option value="100M">100 Mb/s</option><option value="1G" selected>1 Gb/s</option><option value="10G">10 Gb/s</option></select></label>
+          <label>Familia de fibra<select name="fiberFamily"><option value="SM" selected>Monomodo</option><option value="MM">Multimodo</option></select></label>
+          <label>Tipo de fibra<select name="fiberType"></select></label>
+          <label>Uso de fibras<select name="linkMode"><option value="duplex" selected>Dos fibras (duplex)</option><option value="bidi">Una fibra (BiDi)</option></select></label>
+          <label>Distancia del enlace (m)<input name="distance" type="number" min="1" max="120000" step="1" value="300" inputmode="numeric"></label>
+          <label>Reserva de cable (%)<input name="reserve" type="number" min="0" max="50" step="1" value="10" inputmode="numeric"></label>
+        </div></fieldset>
+        <div class="bom-endpoints">
+          <fieldset class="bom-card endpoint-card" data-end="A"><legend>2. Extremo A</legend><div class="bom-fields">
+            <label>Arquitectura del extremo<select name="activeA"><option value="converter">Conversor Speednet</option><option value="switch" selected>Switch existente + módulo Speednet</option><option value="existing">Equipo existente / no incluir óptica</option></select></label>
+            <label class="endpoint-product">Producto Fiber Electronics<select name="productA"></select></label>
+            <label>Terminación<select name="terminationA"><option value="box6">Caja óptica 6 hilos</option><option value="box12" selected>Caja óptica 12 hilos</option><option value="odf24">ODF 24 hilos</option><option value="existing">Existente / no incluir</option></select></label>
+            <label>Conector de terminación<select name="terminationConnectorA"><option value="LC" selected>LC</option><option value="SC">SC</option><option value="SC/APC">SC/APC</option></select></label>
+            <label>Patch cord (m)<input name="patchLengthA" type="number" min="1" max="100" value="3"></label>
+          </div><div class="endpoint-summary" id="summary-A"></div></fieldset>
+          <fieldset class="bom-card endpoint-card" data-end="B"><legend>3. Extremo B</legend><div class="bom-fields">
+            <label>Arquitectura del extremo<select name="activeB"><option value="converter">Conversor Speednet</option><option value="switch" selected>Switch existente + módulo Speednet</option><option value="existing">Equipo existente / no incluir óptica</option></select></label>
+            <label class="endpoint-product">Producto Fiber Electronics<select name="productB"></select></label>
+            <label>Terminación<select name="terminationB"><option value="box6">Caja óptica 6 hilos</option><option value="box12" selected>Caja óptica 12 hilos</option><option value="odf24">ODF 24 hilos</option><option value="existing">Existente / no incluir</option></select></label>
+            <label>Conector de terminación<select name="terminationConnectorB"><option value="LC" selected>LC</option><option value="SC">SC</option><option value="SC/APC">SC/APC</option></select></label>
+            <label>Patch cord (m)<input name="patchLengthB" type="number" min="1" max="100" value="3"></label>
+          </div><div class="endpoint-summary" id="summary-B"></div></fieldset>
         </div>
-
-      </div>
-
-      <footer class="footer" id="contact">
-        <div class="container footer-grid">
-
-          <div>
-              <img src="./img/logos/fiber.png" class="footer-logo">
-              <p>
-                Fiber Electronics SAS<br>
-                Bogotá Colombia
-              </p>
-          </div>
-
-          <div>
-             <h4>Contacto</h4>
-             <p>
-               📧 ventas@fibersas.com<br>
-               📱 
-               <a 
-                 href="https://wa.me/573134991444?text=Hola,%20quiero%20información%20sobre%20BOMaker"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="footer-whatsapp"
-               >
-                 +57 313 499 1444
-               </a>
-             </p>
-          </div>
-
-          <div>
-             <h4>Dirección</h4>
-             <p>
-               Calle 17 No. 12-53<br>
-               Bogotá Colombia
-             </p>
-          </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            Powered by DukeVilla
-        </div>
-      </footer>
-
-    </main>
-
+        <fieldset class="bom-card"><legend>4. Cable principal</legend><div class="bom-fields">
+          <label>Familia del cable<select name="cableFamily"><option value="SM" selected>Monomodo</option><option value="MM">Multimodo</option></select></label>
+          <label>Tipo de fibra del cable<select name="cableFiber"></select></label>
+          <label>Construcción<select name="construction"></select></label>
+          <label>Número de hilos<select name="strands"></select></label>
+        </div><p class="field-help">Solo se muestran referencias disponibles en los selectores de Fiber Electronics y Speednet. La selección se hereda del enlace, pero puede editarse.</p></fieldset>
+      </form>
+      <div id="bom-alerts" class="bom-alerts" aria-live="polite"></div>
+    </div></section>
+    <section class="bomaker-results" id="resultado"><div class="container">
+      <div class="builder-heading"><div><span class="bomaker-eyebrow">Diseño calculado</span><h2>Diagrama y lista de materiales</h2></div><span id="bom-status" class="bom-status"></span></div>
+      <div id="bom-diagram" class="bom-diagram"></div>
+      <div class="bom-table-wrap"><table class="bom-table"><thead><tr><th>Ítem</th><th>Descripción sugerida</th><th>Cantidad</th><th>Unidad</th></tr></thead><tbody id="bom-rows"></tbody></table></div>
+      <div class="bom-actions"><button class="btn primary" id="bom-pdf" type="button">Descargar PDF</button><a class="btn bom-whatsapp" id="bom-whatsapp" target="_blank" rel="noopener noreferrer">Enviar por WhatsApp</a><button class="btn secondary" id="bom-copy" type="button">Copiar resumen</button></div>
+      <p class="bom-disclaimer">Diseño preliminar para cotización. La ingeniería definitiva debe validar pérdidas ópticas, alcance del fabricante, ambiente, ruta, normativa y reserva de mantenimiento.</p>
+    </div></section>
+  </main>
+  <footer class="footer" id="contact"><div class="container footer-grid"><div><img src="/img/logos/fiber.png" class="footer-logo" alt="Fiber Electronics"><p>Fiber Electronics SAS<br>Bogotá, Colombia</p></div><div><h4>Contacto</h4><p>ventas@fibersas.com<br><a href="https://wa.me/573134991444">+57 313 499 1444</a></p></div><div><h4>Herramienta</h4><p>BOmaker PTP<br>Powered by DukeVilla</p></div></div></footer>
+  <script type="module" src="/js/bomaker.js?v=20260930-3"></script>
 </body>
 </html>
