@@ -1,3 +1,4 @@
+import { publicFile, securityHeadersFor } from './web-security.mjs';
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { readFile, stat } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -5,6 +6,7 @@ import { extname, join, normalize } from "node:path";
 import { Pool } from "pg";
 
 const root = process.cwd();
+const applySecurityHeaders = securityHeadersFor(root);
 const port = Number(process.env.PORT || 8766);
 const production = process.env.NODE_ENV === "production";
 const secret = process.env.VERIFY_SECRET || "local-fiber-development-secret";
@@ -144,7 +146,7 @@ async function popularConfigurations(){
   return ranked.length?ranked:patchcordRoutes.slice(0,5).map(item=>({path:item.path,label:titleFor(item).replace(' | Fiber Electronics',''),count:0}));
 }
 
-const server=createServer(async(req,res)=>{ try {
+const server=createServer(async(req,res)=>{ applySecurityHeaders(res); try {
   const url=new URL(req.url,`http://${req.headers.host||"localhost"}`);
   if(url.pathname==="/api/health") return json(res,200,{ok:true,database:Boolean(pool),service:"fiber"});
   if(url.pathname==="/api/popular-configurations") return json(res,200,{items:await popularConfigurations()});
@@ -160,6 +162,6 @@ const server=createServer(async(req,res)=>{ try {
   const cableItem=parseCablePath(url.pathname);
   if(url.pathname.startsWith("/cables-fibra/")) { if(!cableItem) return json(res,404,{error:"Referencia no encontrada"}); const html=await renderPage(cableItem,'cable'); res.writeHead(200,{"content-type":"text/html; charset=utf-8","cache-control":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); return res.end(html); }
   let requested=url.pathname==="/"?"/index.html":url.pathname==="/admin"||url.pathname==="/admin/"?"/admin.html":url.pathname==="/bomaker"||url.pathname==="/bomaker/"?"/bomaker.html":url.pathname;
-  const safe=normalize(requested).replace(/^(\.\.(\/|\\|$))+/g,""); const file=join(root,safe); if(!file.startsWith(root)) return json(res,403,{error:"Forbidden"}); const info=await stat(file); if(!info.isFile()) throw Object.assign(new Error("Not found"),{code:"ENOENT"}); res.writeHead(200,{"content-type":mime[extname(file).toLowerCase()]||"application/octet-stream","cache-control":production&&!file.endsWith(".html")?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); res.end(await readFile(file));
+  const safe=normalize(requested).replace(/^(\.\.(\/|\\|$))+/g,""); const file=publicFile(root,decodeURIComponent(requested)); if(!file) return json(res,404,{error:"Not found"}); const info=await stat(file); if(!info.isFile()) throw Object.assign(new Error("Not found"),{code:"ENOENT"}); res.writeHead(200,{"content-type":mime[extname(file).toLowerCase()]||"application/octet-stream","cache-control":production&&!file.endsWith(".html")?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff","referrer-policy":"strict-origin-when-cross-origin"}); res.end(await readFile(file));
 } catch(error) { console.error('Request failed',req.method,req.url,error); const notFound=error?.code==="ENOENT"; if(!res.headersSent) json(res,notFound?404:500,{error:notFound?"Not found":"Server error"}); else res.end(); }});
 server.listen(port,()=>console.log(`Fiber Electronics listening on ${port}`));
