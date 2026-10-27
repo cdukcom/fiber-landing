@@ -107,7 +107,6 @@ export function renderCablefo(container, initial = {}) {
       info.textContent = item.construction === 'armada'
         ? 'Cable GYXTW para exteriores con tubo holgado con gel, cinta bloqueadora de agua, armadura de acero corrugado y alambres de acero.'
         : 'Cable JET no metálico de la familia interior / exterior, con tubo holgado con gel y refuerzo de hilos de vidrio.'
-      if (item.construction === 'indoor-outdoor' && item.fiber === 'OM4') info.textContent += ' La ficha JET recibida documenta OM3; las prestaciones de OM4 requieren confirmación del fabricante.'
       datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}`
       datasheet.dataset.reference = text
       whatsapp.href = `https://wa.me/573134991444?text=${encodeURIComponent(`Hola, quiero cotizar:\n${text}\nCantidad: ${requestedMeters} metros`)}`
