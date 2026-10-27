@@ -105,7 +105,7 @@ export function renderCablefo(container, initial = {}) {
       updateImage(item)
       result.textContent = text
       info.textContent = item.construction === 'armada'
-        ? 'Cable GYXTW para exteriores con tubo holgado con gel, cinta bloqueadora de agua, armadura de acero corrugado y alambres de acero.'
+        ? 'Cable GYXTW para exteriores con cubierta PE, armadura de acero corrugado para protección mecánica y contra roedores, tubo con gel, cinta bloqueadora de agua y dos alambres de acero.'
         : 'Cable JET no metálico de la familia interior / exterior, con tubo holgado con gel y refuerzo de hilos de vidrio.'
       datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}`
       datasheet.dataset.reference = text
