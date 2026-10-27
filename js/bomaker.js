@@ -1,3 +1,4 @@
+import { cableImportReference } from './cable-reference.js?v=20261027-import'
 import { track } from './analytics.js'
 import { converterReachOptions, formatReach, converterDistanceWarning } from './bomaker-reach.js'
 
@@ -6,7 +7,7 @@ const labels={switch:'Switch existente',converter:'Conversor Speednet',existing:
 const cableCatalog=[
   {family:'SM',fiber:'OS2',construction:'armada',strands:12,reference:'Cable Monomodo Armado OS2 12 hilos'},
   ...['OM3','OM4'].flatMap(fiber=>['indoor-outdoor','armada'].flatMap(construction=>[6,12].map(strands=>({family:'MM',fiber,construction,strands,reference:`Cable Multimodo ${labels[construction]} ${fiber} ${strands} hilos`}))))
-]
+].map(item => ({...item, reference:`${cableImportReference(item)} · ${item.reference}`}))
 let sfpCatalog=[],converterCatalog=[],lastDesign=null,inheritedCable=true
 const escapeHtml=value=>String(value??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')
 const value=name=>form.elements[name].value

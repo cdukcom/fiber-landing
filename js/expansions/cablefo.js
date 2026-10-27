@@ -1,3 +1,4 @@
+import { cableImportReference } from '../cable-reference.js?v=20261027-import'
 import { track } from '../analytics.js'
 
 const CABLES = [
@@ -78,7 +79,7 @@ export function renderCablefo(container, initial = {}) {
     const loadCount = () => setOptions(count, unique(compatible({family:family.value, construction:construction.value, fiber:fiber.value}), 'count'), value => `${value} hilos`)
     const selectedCable = () => compatible({family:family.value, construction:construction.value, fiber:fiber.value, count:count.value})[0]
     const selectedPath = (item = selectedCable()) => item ? `/cables-fibra/${item.slug}/` : '/'
-    const reference = item => `Cable ${LABELS[item.family]} ${LABELS[item.construction]} ${item.fiber} ${item.count} hilos`
+    const reference = item => `${cableImportReference(item)} · Cable ${LABELS[item.family]} ${LABELS[item.construction]} ${item.fiber} ${item.count} hilos`
     const datasheetFor = item => {
       if (item.family === 'SM') return 'cable-armado-monomodo-os2-12-hilos.pdf'
       if (item.construction === 'armada') return 'cable-armado-multimodo-om3-om4-6-12-hilos.pdf'
@@ -107,7 +108,7 @@ export function renderCablefo(container, initial = {}) {
       info.textContent = item.construction === 'armada'
         ? 'Cable GYXTW para exteriores con cubierta PE, armadura de acero corrugado para protección mecánica y contra roedores, tubo con gel, cinta bloqueadora de agua y dos alambres de acero.'
         : 'Cable JET no metálico de la familia interior / exterior, con tubo holgado con gel y refuerzo de hilos de vidrio.'
-      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}`
+      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}?v=20261027-comercial-referencias`
       datasheet.dataset.reference = text
       whatsapp.href = `https://wa.me/573134991444?text=${encodeURIComponent(`Hola, quiero cotizar:\n${text}\nCantidad: ${requestedMeters} metros`)}`
       whatsapp.dataset.line = 'cablefo'

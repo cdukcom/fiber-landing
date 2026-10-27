@@ -29,7 +29,7 @@ boldcell=ParagraphStyle('boldcell',parent=cell,fontName='Bold')
 COLORS=['#1760b2','#ed7b19','#158d4b','#79503e','#8e979f','#ffffff','#dc1b27','#1b2026','#f2cf19','#86429c','#ed8ab7','#69cec6']
 NAMES=['Azul','Naranja','Verde','Marrón','Gris','Blanco','Rojo','Negro','Amarillo','Violeta','Rosa','Aguamarina']
 PRODUCTS=[
- dict(key='sm',filename='cable-armado-monomodo-os2-12-hilos.pdf',headline='ARMADA',subhead='MONOMODO OS2',tag='12 HILOS  /  GYXTW',title='Cable armado monomodo OS2 de 12 hilos',route='/cables-fibra/monomodo-armada-os2-12-hilos/',lead='Conecta tu infraestructura con fibra monomodo y protección de acero para redes exteriores.',apps=['Ductos y entierro directo','Redes troncales','Infraestructura de campus','Redes industriales']),
+ dict(key='sm',filename='cable-armado-monomodo-os2-12-hilos.pdf',headline='ARMADA',subhead='MONOMODO OS2',tag='GYXTW 12C SM G652D',title='Cable armado monomodo OS2 de 12 hilos',route='/cables-fibra/monomodo-armada-os2-12-hilos/',lead='Conecta tu infraestructura con fibra monomodo y protección de acero para redes exteriores.',apps=['Ductos y entierro directo','Redes troncales','Infraestructura de campus','Redes industriales']),
  dict(key='mm',filename='cable-armado-multimodo-om3-om4-6-12-hilos.pdf',headline='ARMADA',subhead='MULTIMODO OM3 / OM4',tag='6 O 12 HILOS  /  GYXTW',title='Cable armado multimodo OM3 / OM4 de 6 o 12 hilos',route='/cables-fibra/multimodo-armada-om3-12-hilos/',lead='Conecta edificios y redes de campus con fibra multimodo y protección mecánica para exteriores.',apps=['Ductos y entierro directo','Enlaces entre edificios','Redes de campus','Redes industriales']),
  dict(key='jet',filename='cable-indoor-outdoor-multimodo-om3-om4-6-12-hilos.pdf',headline='INTERIOR / EXTERIOR',subhead='MULTIMODO OM3 / OM4',tag='6 O 12 HILOS  /  JET',title='Cable interior / exterior multimodo OM3 / OM4 de 6 o 12 hilos',route='/cables-fibra/multimodo-indoor-outdoor-om3-12-hilos/',lead='Integra tu red con fibra multimodo, diseño compacto y refuerzo no metálico de hilos de vidrio.',apps=['Redes empresariales','Centros de datos','Redes de campus','Canalizaciones y edificios'])
 ]
@@ -130,7 +130,7 @@ def draw_table(c,rows,x,y,widths,heights=None,header=False):
 
 def specs(c,jet,sm):
  head(c,'DATOS ÓPTICOS Y DIMENSIONES',32,318,259)
- left=[('Tipo de fibra','OS2 · G.652.D' if sm else 'OM3 / OM4 · 50/125 µm'),('Número de fibras','12' if sm else '6 o 12'),('Longitudes de onda','1310 / 1550 nm' if sm else '850 / 1300 nm'),('Atenuación OM3 (850 / 1300 nm)' if jet else 'Atenuación (ondas indicadas)','0,36 / 0,24 dB/km' if sm else '3,5 / 1,5 dB/km'),('Diámetro exterior','6,0 ± 0,2 mm' if jet else '8,3 ± 0,5 mm'),('Diámetro del tubo PBT','2,5 ± 0,1 mm'),('Refuerzo' if jet else 'Diámetro de alambres de acero','Hilos de vidrio' if jet else '0,7 ± 0,05 mm')]
+ left=[('Tipo de fibra','SM G652D · OS2' if sm else 'OM3 / OM4 · 50/125 µm'),('Número de fibras','12' if sm else '6 o 12'),('Longitudes de onda','1310 / 1550 nm' if sm else '850 / 1300 nm'),('Atenuación OM3 (850 / 1300 nm)' if jet else 'Atenuación (ondas indicadas)','0,36 / 0,24 dB/km' if sm else '3,5 / 1,5 dB/km'),('Diámetro exterior','6,0 ± 0,2 mm' if jet else '8,3 ± 0,5 mm'),('Diámetro del tubo PBT','2,5 ± 0,1 mm'),('Refuerzo' if jet else 'Diámetro de alambres de acero','Hilos de vidrio' if jet else '0,7 ± 0,05 mm')]
  if not jet:left.append(('Cubierta exterior','PE negro'))
  bottom=draw_table(c,left,32,295,[146,113],heights=[21]*len(left))
  head(c,'PRESTACIONES DEL CABLE',304,318,259)
@@ -153,7 +153,7 @@ def cta(c,p):
 
 def build(p):
  jet=p['key']=='jet';sm=p['key']=='sm';c=canvas.Canvas(str(OUT/p['filename']),pagesize=A4,pageCompression=1)
- c.setTitle(p['title']);c.setAuthor('Speednet / Fiber Electronics S.A.S.');c.setSubject('Ficha comercial y técnica en español')
+ c.setTitle((p['tag']+' · ' if sm else '')+p['title']);c.setAuthor('Speednet / Fiber Electronics S.A.S.');c.setSubject('Ficha comercial y técnica en español')
  c.setFillColor(WHITE);c.rect(0,0,*A4,fill=1,stroke=0)
  text(c,'SPEEDNET',32,807,27,'Brand',RED)
  text(c,'CONECTIVIDAD ÓPTICA',34,795,6.9,'Bold',GRAY)
@@ -164,8 +164,15 @@ def build(p):
  text(c,'CABLE DE FIBRA ÓPTICA',32,768,7.8,'Bold',GRAY)
  text(c,p['headline'],32,738,22.5 if jet else 31,'Bold',RED)
  text(c,p['subhead'],32,714,18.2 if not sm else 20,'Bold',DARK)
- text(c,p['tag'],33,693,9,'Bold',DARK)
- para(c,p['lead'],33,674,231,body)
+ if sm:
+  text(c,p['tag'],33,693,10.5,'Bold',DARK)
+  lead_top=674
+ else:
+  model='JET' if jet else 'GYXTW'
+  text(c,f'{model} 6C MM OM3  ·  {model} 12C MM OM3',33,693,8.4,'Bold',DARK)
+  text(c,f'{model} 6C MM OM4  ·  {model} 12C MM OM4',33,680,8.4,'Bold',DARK)
+  lead_top=666
+ para(c,p['lead'],33,lead_top,231,body)
  # Product cutaway from the existing, approved product asset.
  path(c,[(288,600),(563,600),(563,778),(400,778)],SOFT)
  fit(c,ROOT/'img/cable-types'/('indoor-outdoor.webp' if jet else 'armada.webp'),269,590,309,211)
