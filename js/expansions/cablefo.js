@@ -11,7 +11,7 @@ const CABLES = [
 const LABELS = { SM:'Monomodo', MM:'Multimodo', armada:'Armada', 'indoor-outdoor':'Indoor / Outdoor' }
 const CABLE_IMAGES = {
   armada: {
-    src:'/img/cable-types/armada.webp',
+    src:'/img/cable-types/armada-pbt.png?v=20261103-pbt-fabrica',
     alt:'Corte del cable de fibra óptica armado GYXTW'
   },
   'indoor-outdoor': {
@@ -24,7 +24,7 @@ export function renderCablefo(container, initial = {}) {
   container.innerHTML = `
     <div class="expansion-panel">
       <div class="pc-visual cablefo-visual">
-        <img id="cable-image" src="/img/cable-types/armada.webp" class="pc-image cablefo-image" alt="Corte del cable de fibra óptica armado GYXTW">
+        <img id="cable-image" src="/img/cable-types/armada-pbt.png?v=20261103-pbt-fabrica" class="pc-image cablefo-image" alt="Corte del cable de fibra óptica armado GYXTW">
         <div class="cablefo-meter-badge">Venta por metros</div>
       </div>
       <div class="expansion-content">
@@ -108,7 +108,7 @@ export function renderCablefo(container, initial = {}) {
       info.textContent = item.construction === 'armada'
         ? 'Cable GYXTW para exteriores con cubierta PE, armadura de acero corrugado para protección mecánica y contra roedores, tubo con gel, cinta bloqueadora de agua y dos alambres de acero.'
         : 'Cable JET no metálico de la familia interior / exterior, con tubo holgado con gel y refuerzo de hilos de vidrio.'
-      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}?v=20261027-speednet-qr`
+      datasheet.href = `/docs/fichas-tecnicas/cable-fibra/${datasheetFor(item)}?v=20261103-pbt-fabrica`
       datasheet.dataset.reference = text
       whatsapp.href = `https://wa.me/573134991444?text=${encodeURIComponent(`Hola, quiero cotizar:\n${text}\nCantidad: ${requestedMeters} metros`)}`
       whatsapp.dataset.line = 'cablefo'

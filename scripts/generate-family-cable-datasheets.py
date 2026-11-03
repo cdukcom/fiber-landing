@@ -76,6 +76,7 @@ def benefits(c,jet):
   para(c,desc,x+39,553,130,small)
 
 def cross_section(c,jet):
+ # Factory correction: gray PBT wall directly borders the gel; no extra white annulus.
  x,y=97,443
  def circle(r,color):c.setFillColor(colors.HexColor(color));c.circle(x,y,r,fill=1,stroke=0)
  circle(49,'#22262b')
@@ -83,12 +84,12 @@ def cross_section(c,jet):
   circle(37,'#e1dac4');c.setStrokeColor(colors.HexColor('#b7b49f'));c.setLineWidth(.5)
   for i in range(72):
    a=math.radians(i*5);c.line(x+math.cos(a)*32,y+math.sin(a)*32,x+math.cos(a)*36,y+math.sin(a)*36)
-  circle(29,'#d2d9df');circle(25,'#fafafa');circle(20,'#cee7ed')
+  circle(29,'#d2d9df');circle(25,'#cee7ed')
  else:
   circle(34,'#aebbc5');c.setStrokeColor(colors.HexColor('#728793'));c.setLineWidth(.6)
   for i in range(60):
    a=math.radians(i*6);c.line(x+math.cos(a)*31,y+math.sin(a)*31,x+math.cos(a)*34,y+math.sin(a)*34)
-  circle(30,'#79b48e');circle(26,'#d2d9df');circle(23,'#fafafa');circle(19,'#cee7ed')
+  circle(30,'#79b48e');circle(26,'#d2d9df');circle(23,'#cee7ed')
   for dx in [-41,41]:
    c.setFillColor(colors.HexColor('#d5dbe0'));c.circle(x+dx,y,4,fill=1,stroke=0)
  coords=[(-9,9),(0,10),(9,8),(-12,0),(-4,1),(5,1),(13,0),(-9,-9),(0,-9),(9,-8),(-3,-17),(4,17)]
@@ -175,7 +176,7 @@ def build(p):
  para(c,p['lead'],33,lead_top,231,body)
  # Product cutaway from the existing, approved product asset.
  path(c,[(288,600),(563,600),(563,778),(400,778)],SOFT)
- fit(c,ROOT/'img/cable-types'/('indoor-outdoor.webp' if jet else 'armada.webp'),269,590,309,211)
+ fit(c,ROOT/'img/cable-types'/('indoor-outdoor.webp' if jet else 'armada-pbt.png'),269,590,309,211)
  c.setFillColor(RED);c.roundRect(32,598,142,23,3,fill=1,stroke=0);text(c,'DISPONIBLE POR METROS',42,606,7.7,'Bold',WHITE)
  benefits(c,jet);construction(c,p,jet);colorstrip(c);specs(c,jet,sm);cta(c,p)
  c.setFillColor(DARK);c.rect(0,0,595.3,35,fill=1,stroke=0)
